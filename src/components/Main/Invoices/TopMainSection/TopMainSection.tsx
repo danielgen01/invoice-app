@@ -4,7 +4,7 @@ import plus from "../../../../../public/assets/icon-plus.svg"
 export function TopMainSection() {
   return (
     <section className="mt-10 xl:mt-0">
-      <div className="top-content flex justify-between items-center px-2 xl:py-52 xl:px-52">
+      <div className="top-content flex justify-between items-center px-2 ">
         <div className="invoices flex flex-col gap-1">
           <h1 className="font-bold text-2xl dark:text-white">Invoices</h1>
           <p className="text-medium-gray font-bold dark:text-white">
