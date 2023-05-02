@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit"
-import Data from "./data.json"
+import { createSlice } from "@reduxjs/toolkit";
+import Data from "./data.json";
 
 const dataSlice = createSlice({
   name: "Data",
@@ -15,9 +15,10 @@ const dataSlice = createSlice({
   //     // Do something with the state and action
   //   });
   // },
-})
+});
 
-export const { actions: yourActions, reducer: yourReducer } = dataSlice
+// Export reducer directly
+export default dataSlice.reducer;
 
 // Export actions for use in components
-// export const { yourAction1, yourAction2 } = yourActions;
+export const { /* yourAction1, yourAction2 */ } = dataSlice.actions;
