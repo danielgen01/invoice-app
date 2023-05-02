@@ -1,8 +1,14 @@
+import React from "react"
 import Logo from "../../../public/assets/logo.svg"
 import moon from "../../../public/assets/icon-moon.svg"
 import avatar from "../../../public/assets/image-avatar.jpg"
+import sun from "../../../public/assets/icon-sun.svg"
 
-const Navbar: React.FC = () => {
+type props = {
+  toggleDarkMode: () => void
+  isDarkMode: boolean
+}
+const Navbar: React.FC<props> = ({ toggleDarkMode, isDarkMode }) => {
   return (
     <>
       <nav className="text-6xl h-24 bg-[#252945]">
@@ -12,7 +18,21 @@ const Navbar: React.FC = () => {
           </figure>
           <section className="moon-and-avatar  flex items-center gap-10">
             <figure className="moon">
-              <img src={moon} alt="moon" className="w-8" />
+              {isDarkMode ? (
+                <img
+                  src={sun}
+                  alt="sun"
+                  className="w-8"
+                  onClick={toggleDarkMode}
+                />
+              ) : (
+                <img
+                  src={moon}
+                  alt="moon"
+                  className="w-8"
+                  onClick={toggleDarkMode}
+                />
+              )}
             </figure>
             <div className="border border-y  border-[#888EB0] h-24"></div>
             <figure className="avatar">
