@@ -9,7 +9,7 @@ const EmptyBoard = () => {
         There is nothing here
       </h1>
       <p className="font-semibold text-medium-gray">
-        Create an invoice by clicking the{" "}
+        Create an invoice by clicking the{" "}<br/>
         <span className="text-[#7E88C3] font-bold">New </span>
          button and get started
       </p>

@@ -22,14 +22,14 @@ const Navbar: React.FC<props> = ({ toggleDarkMode, isDarkMode }) => {
                 <img
                   src={sun}
                   alt="sun"
-                  className="w-8"
+                  className="w-8 cursor-pointer"
                   onClick={toggleDarkMode}
                 />
               ) : (
                 <img
                   src={moon}
                   alt="moon"
-                  className="w-8"
+                  className="w-8 cursor-pointer"
                   onClick={toggleDarkMode}
                 />
               )}
