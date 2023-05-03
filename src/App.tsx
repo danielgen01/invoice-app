@@ -5,6 +5,7 @@ import "./index.css"
 import Sidebar from "./components/Main/Invoices/Sidebar/Sidebar"
 import DeleteDialog from "./Redux/slices/DeleteDialog/DeleteDialog"
 import NewInvoiceDialog from "./Redux/slices/NewInvoice/NewInvoiceDialog"
+import EditInvoiceDialog from "./Redux/slices/EditInvoice/EditInvoice"
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(
@@ -35,7 +36,8 @@ function App() {
       </div>
       <Main />
       {/* <DeleteDialog /> */}
-      <NewInvoiceDialog />
+      {/* <NewInvoiceDialog /> */}
+      <EditInvoiceDialog />
     </div>
   )
 }

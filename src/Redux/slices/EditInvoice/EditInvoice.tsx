@@ -3,7 +3,7 @@ import arrowleft from "../../../../public/assets/icon-arrow-left.svg"
 import deleteicon from "../../../../public/assets/icon-delete.svg"
 import iconplus from "../../../../public/assets/icon-plus.svg"
 
-const NewInvoiceDialog = () => {
+const EditInvoiceDialog = () => {
   return (
     <>
       <div className="overlay background fixed top-0 left-0 bg-black/50 w-screen h-screen  md:block"></div>
@@ -19,7 +19,7 @@ const NewInvoiceDialog = () => {
           <h1 className="font-bold">Go back</h1>
         </button>
         <h1 className="mt-5 font-bold text-2xl New-invoice-headline">
-          New Invoice
+          Edit #....
         </h1>
 
         <BillFromForm />
@@ -39,15 +39,13 @@ const NewInvoiceDialog = () => {
         </section>
 
         <div className="bg-white h-20 dark:bg-[#1E2139]">
-          <div className="footer-content-buttons flex items-center  justify-between w-full h-full px-4">
+          <div className="footer-content-buttons flex items-center gap-2 w-full h-full px-4 justify-end">
             <button className="text-[#9277FF] font-bold bg-[#DFE3FA] px-5 py-3 rounded-full dark:text-white dark:bg-[#252945]">
-              Discard
+              Cancel
             </button>
-            <button className="text-medium-gray font-bold bg-[#252945] px-5 py-3 rounded-full dark:bg-[#888EB0] dark:text-white">
-              Save as Draft
-            </button>
+
             <button className="text-white font-bold bg-[#7C5DFA] px-5 py-3 rounded-full">
-              Save & Send
+              Save Changes
             </button>
           </div>
         </div>
@@ -56,7 +54,7 @@ const NewInvoiceDialog = () => {
   )
 }
 
-export default NewInvoiceDialog
+export default EditInvoiceDialog
 
 function BillFromForm() {
   return (
