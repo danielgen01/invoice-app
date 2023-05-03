@@ -9,7 +9,7 @@ const NewInvoiceDialog = () => {
       <div className="overlay background fixed top-0 left-0 bg-black/50 w-screen h-screen hidden md:block"></div>
       <main
         className="px-5 md:px-10 py-5 New Invoice Modal flex flex-col gap-6 bg-[#F8F8FB]
-       dark:bg-[#0C0E16] dark:text-white md:w-[80%] xl:w-[30%] xl:ml-20 xl:max-h-screen xl:gap-0 xl:py-0 md:absolute"
+       dark:bg-[#0C0E16] dark:text-white md:w-[80%] xl:w-[30%] xl:ml-20 xl:max-h-screen xl:gap-0 xl:py-0 md:absolute top-0 "
       >
         <button className="go-back-button flex items-center gap-5 md:hidden ">
           <img src={arrowleft} alt="goback" className="w-2" />
@@ -34,20 +34,20 @@ const NewInvoiceDialog = () => {
             </span>
           </button>
         </section>
-      
-      <div className="bg-white h-20 dark:bg-[#1E2139]">
-        <div className="footer-content-buttons flex items-center  justify-between w-full h-full px-4">
-          <button className="text-[#9277FF] font-bold bg-[#DFE3FA] px-5 py-3 rounded-full dark:text-white dark:bg-[#252945]">
-            Discard
-          </button>
-          <button className="text-medium-gray font-bold bg-[#252945] px-5 py-3 rounded-full dark:bg-[#888EB0] dark:text-white">
-            Save as Draft
-          </button>
-          <button className="text-white font-bold bg-[#7C5DFA] px-5 py-3 rounded-full">
-            Save & Send
-          </button>
+
+        <div className="bg-white h-20 dark:bg-[#1E2139]">
+          <div className="footer-content-buttons flex items-center  justify-between w-full h-full px-4">
+            <button className="text-[#9277FF] font-bold bg-[#DFE3FA] px-5 py-3 rounded-full dark:text-white dark:bg-[#252945]">
+              Discard
+            </button>
+            <button className="text-medium-gray font-bold bg-[#252945] px-5 py-3 rounded-full dark:bg-[#888EB0] dark:text-white">
+              Save as Draft
+            </button>
+            <button className="text-white font-bold bg-[#7C5DFA] px-5 py-3 rounded-full">
+              Save & Send
+            </button>
+          </div>
         </div>
-      </div>
       </main>
     </>
   )

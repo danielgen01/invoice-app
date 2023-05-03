@@ -33,7 +33,7 @@ function App() {
       <div className="sidebar hidden xl:block">
         <Sidebar toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
       </div>
-      {/* <Main /> */}
+      <Main />
       {/* <DeleteDialog /> */}
       <NewInvoiceDialog />
     </div>
