@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar/Navbar"
 import Main from "./components/Main/Invoices/Main"
 import "./index.css"
 import Sidebar from "./components/Main/Invoices/Sidebar/Sidebar"
+import DeleteDialog from "./Redux/slices/DeleteDialog/DeleteDialog"
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(
@@ -32,6 +33,7 @@ function App() {
         <Sidebar toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
       </div>
       <Main />
+      <DeleteDialog />
     </div>
   )
 }

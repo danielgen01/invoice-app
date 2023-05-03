@@ -27,10 +27,10 @@ const InvoiceRow: React.FC<props> = ({
       batchColor = "orange-500"
       break
     case "draft":
-      batchColor = "gray-500"
+      batchColor = "black dark:white"
       break
     default:
-      batchColor = "gray-500"
+      batchColor = "gray-500/20"
   }
 
   return (
