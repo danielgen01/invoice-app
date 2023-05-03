@@ -31,7 +31,10 @@ const NewInvoiceDialog = () => {
           "
         style={{ display: isNewInvoiceFormOpen ? "block" : "none" }}
       >
-        <button className="go-back-button flex items-center gap-5 md:hidden " onClick={handleToggleNewInvoiceForm}>
+        <button
+          className="go-back-button flex items-center gap-5 md:hidden "
+          onClick={handleToggleNewInvoiceForm}
+        >
           <img src={arrowleft} alt="goback" className="w-2" />
           <h1 className="font-bold">Go back</h1>
         </button>

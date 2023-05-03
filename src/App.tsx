@@ -6,6 +6,7 @@ import Sidebar from "./components/Main/Invoices/Sidebar/Sidebar"
 import DeleteDialog from "./Redux/slices/DeleteDialog/DeleteDialog"
 import NewInvoiceDialog from "./Redux/slices/NewInvoice/NewInvoiceDialog"
 import EditInvoiceDialog from "./Redux/slices/EditInvoice/EditInvoice"
+import ViewInvoice from "./Redux/slices/ViewInvoice/ViewInvoice"
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(
@@ -34,10 +35,11 @@ function App() {
       <div className="sidebar hidden xl:block">
         <Sidebar toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
       </div>
-      <Main />
+      {/* <Main /> */}
       {/* <DeleteDialog /> */}
       <NewInvoiceDialog />
       {/* <EditInvoiceDialog /> */}
+      <ViewInvoice />
     </div>
   )
 }
