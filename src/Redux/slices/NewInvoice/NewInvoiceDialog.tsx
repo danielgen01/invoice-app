@@ -23,7 +23,7 @@ const NewInvoiceDialog = () => {
         style={{ display: isNewInvoiceFormOpen ? "block" : "none" }}
         onClick={handleToggleNewInvoiceForm}
       ></div>
-      <main
+      <dialog
         className=" New Invoice Modal px-5  py-5  flex flex-col gap-6 bg-[#F8F8FB]
        dark:bg-[#0C0E16] dark:text-white 
         md:w-[80%] absolute top-0 md:px-10
@@ -55,7 +55,7 @@ const NewInvoiceDialog = () => {
           </button>
         </section>
 
-        <div className="bg-white h-20 dark:bg-[#1E2139]">
+        <div className="bg-white h-20 dark:bg-[#1E2139] mt-10">
           <div className="footer-content-buttons flex items-center  justify-between w-full h-full px-4">
             <button className="text-[#9277FF] font-bold bg-[#DFE3FA] px-5 py-3 rounded-full dark:text-white dark:bg-[#252945]">
               Discard
@@ -68,7 +68,7 @@ const NewInvoiceDialog = () => {
             </button>
           </div>
         </div>
-      </main>
+      </dialog>
     </>
   )
 }

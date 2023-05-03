@@ -7,7 +7,7 @@ const DeleteDialog = () => {
         className="overlay fixed top-0 left-0 h-screen w-screen
      bg-black/60 "
       >
-        <div
+        <dialog
           className="-translate-x-1/2 -translate-y-1/2 bg-white dark:bg-[#252945]
     w-72 md:w-96 xl:w-[25%] h-52 absolute top-1/2 left-1/2 rounded-xl"
         >
@@ -27,7 +27,7 @@ const DeleteDialog = () => {
               </button>
             </div>
           </div>
-        </div>
+        </dialog>
       </div>
     </>
   )

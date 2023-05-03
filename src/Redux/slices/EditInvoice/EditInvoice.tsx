@@ -7,7 +7,7 @@ const EditInvoiceDialog = () => {
   return (
     <>
       <div className="overlay background fixed top-0 left-0 bg-black/50 w-screen h-screen  md:block"></div>
-      <main
+      <dialog
         className=" New Invoice Modal px-5  py-5  flex flex-col gap-6 bg-[#F8F8FB]
        dark:bg-[#0C0E16] dark:text-white 
         md:w-[80%] absolute top-0 md:px-10
@@ -49,7 +49,7 @@ const EditInvoiceDialog = () => {
             </button>
           </div>
         </div>
-      </main>
+      </dialog>
     </>
   )
 }
