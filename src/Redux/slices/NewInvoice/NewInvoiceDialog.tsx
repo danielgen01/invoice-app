@@ -5,29 +5,44 @@ import iconplus from "../../../../public/assets/icon-plus.svg"
 
 const NewInvoiceDialog = () => {
   return (
-    <main className="px-5 py-5 New Invoice Modal flex flex-col gap-6">
-      <button className="go-back-button flex items-center gap-5">
-        <img src={arrowleft} alt="goback" className="w-2" />
-        <h1 className="font-bold">Go back</h1>
-      </button>
-      <h1 className="mt-5 font-bold text-2xl New-invoice-headline">
-        New Invoice
-      </h1>
-
-      <BillFromForm />
-      <BillToForm />
-      <InvoiceInfo />
-      <section className="flex flex-col gap-6 Itemlist">
-        <h1 className="font-bold text-medium-gray text-xl ">Item List</h1>
-
-        <ItemNameForm />
-        <ItemNameForm />
-        <button className="flex items-center justify-center gap-2 bg-[#DFE3FA] py-3 rounded-full">
-          <img src={iconplus} alt="add" />
-          <span className="font-bold text-[#9277FF]">Add new Item</span>
+    <>
+      <main className="px-5 py-5 New Invoice Modal flex flex-col gap-6 bg-[#F8F8FB]">
+        <button className="go-back-button flex items-center gap-5">
+          <img src={arrowleft} alt="goback" className="w-2" />
+          <h1 className="font-bold">Go back</h1>
         </button>
-      </section>
-    </main>
+        <h1 className="mt-5 font-bold text-2xl New-invoice-headline">
+          New Invoice
+        </h1>
+
+        <BillFromForm />
+        <BillToForm />
+        <InvoiceInfo />
+        <section className="flex flex-col gap-6 Itemlist">
+          <h1 className="font-bold text-medium-gray text-xl ">Item List</h1>
+
+          <ItemNameForm />
+          <ItemNameForm />
+          <button className="flex items-center justify-center gap-2 bg-[#DFE3FA] py-3 rounded-full">
+            <img src={iconplus} alt="add" />
+            <span className="font-bold text-[#9277FF]">Add new Item</span>
+          </button>
+        </section>
+      </main>
+      <footer className="bg-white h-20">
+        <div className="footer-content-buttons flex items-center  justify-between w-full h-full px-4">
+          <button className="text-[#9277FF] font-bold bg-[#DFE3FA] px-5 py-3 rounded-full">
+            Discard
+          </button>
+          <button className="text-medium-gray font-bold bg-[#252945] px-5 py-3 rounded-full">
+            Save as Draft
+          </button>
+          <button className="text-white font-bold bg-[#7C5DFA] px-5 py-3 rounded-full">
+            Save & Send
+          </button>
+        </div>
+      </footer>
+    </>
   )
 }
 
