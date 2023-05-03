@@ -1,4 +1,5 @@
 import React from "react"
+import arrowRight from "../../../public/assets/icon-arrow-right.svg"
 
 type props = {
   invoiceId: string
@@ -26,7 +27,7 @@ const InvoiceRow: React.FC<props> = ({
       batchColor = "orange-500"
       break
     case "draft":
-      batchColor = "white"
+      batchColor = "gray-500"
       break
     default:
       batchColor = "gray-500"
@@ -34,10 +35,10 @@ const InvoiceRow: React.FC<props> = ({
 
   return (
     <>
-      <div className="row h-40 bg-white shadow-lg rounded-lg dark:bg-[#1E2139]  w-[90%]">
-        <div className="content px-5 py-5 grid grid-cols-2 justify-between w-full">
+      <div className="row h-40 bg-white shadow-md rounded-lg dark:bg-[#1E2139]  w-[90%] xl:h-20">
+        <div className="content px-5 py-5 grid grid-cols-2 justify-between w-full xl:items-center">
           {/* FIRST GRID COL */}
-          <section className="first-grid-item flex flex-col gap-5">
+          <section className="first-grid-item flex flex-col gap-5 xl:flex-row xl:items-center   xl:gap-28 2xl:gap-32 ">
             <h1 className="font-bold uppercase dark:text-white">
               <span className="text-[#7e88C3]">#</span>
               {invoiceId}
@@ -48,7 +49,7 @@ const InvoiceRow: React.FC<props> = ({
             <h2 className="font-bold dark:text-white">€ {totalAmount}</h2>
           </section>
           {/* SECOND GRID COL */}
-          <section className="second-grid-item flex flex-col items-end gap-10 ">
+          <section className="second-grid-item flex flex-col items-end gap-10 xl:flex-row xl:items-center xl:justify-end">
             <p className="text-medium-gray font-bold ">{clientName}</p>
             <div
               className="status flex items-center
@@ -56,8 +57,8 @@ const InvoiceRow: React.FC<props> = ({
             >
               <div className={`status-batch w-3 h-3 bg-${batchColor} rounded-full`}></div>
               <h1 className={`text-${batchColor} font-bold`}>{status}</h1>
-              
             </div>
+            <img src={arrowRight} alt="" className="hidden xl:block w-4 "/>
           </section>
         </div>
       </div>
