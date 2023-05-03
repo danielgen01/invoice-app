@@ -1,14 +1,21 @@
 import arrowdown from "../../../../../public/assets/icon-arrow-down.svg"
 import plus from "../../../../../public/assets/icon-plus.svg"
+import { useAppSelector } from "../../../../Redux/store"
+import { RootState } from "../../../../Redux/rootReducer"
 
 export function TopMainSection() {
+  const data = useAppSelector((state: RootState) => state.data.Data)
+  console.log(data)
+
   return (
     <section className="mt-10 xl:mt-0">
       <div className="top-content flex justify-between items-center px-2 ">
         <div className="invoices flex flex-col gap-1">
           <h1 className="font-bold text-2xl dark:text-white">Invoices</h1>
           <p className="text-medium-gray font-bold dark:text-white">
-            No invoices
+            {data.length > 0 && data
+              ? `${data.length} invoices`
+              : "No invoices"}
           </p>
         </div>
         <section className="buttons flex items-center gap-4 xl:gap-20">
