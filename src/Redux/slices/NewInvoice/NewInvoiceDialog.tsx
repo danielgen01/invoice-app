@@ -6,8 +6,8 @@ import iconplus from "../../../../public/assets/icon-plus.svg"
 const NewInvoiceDialog = () => {
   return (
     <>
-      <main className="px-5 py-5 New Invoice Modal flex flex-col gap-6 bg-[#F8F8FB] dark:bg-[#0C0E16] dark:text-white">
-        <button className="go-back-button flex items-center gap-5">
+      <main className="px-5 md:px-10 py-5 New Invoice Modal flex flex-col gap-6 bg-[#F8F8FB] dark:bg-[#0C0E16] dark:text-white md:w-[80%]">
+        <button className="go-back-button flex items-center gap-5 md:hidden ">
           <img src={arrowleft} alt="goback" className="w-2" />
           <h1 className="font-bold">Go back</h1>
         </button>
@@ -18,14 +18,14 @@ const NewInvoiceDialog = () => {
         <BillFromForm />
         <BillToForm />
         <InvoiceInfo />
-        <section className="flex flex-col gap-6 Itemlist">
+        <section className="flex flex-col gap-6 md:gap-2 Itemlist">
           <h1 className="font-bold text-medium-gray text-xl ">Item List</h1>
 
           <ItemNameForm />
           <ItemNameForm />
           <button className="flex items-center justify-center gap-2 bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]">
             <img src={iconplus} alt="add" />
-            <span className="font-bold text-[#9277FF] dark:text-medium-gray">
+            <span className="font-bold text-[#9277FF] dark:text-white">
               Add new Item
             </span>
           </button>
@@ -67,7 +67,7 @@ function BillFromForm() {
           id="street-adress"
           className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
         />
-        <div className="city-and-postcode flex items-center justify-between w-full">
+        <div className="city-and-postcode grid grid-cols-2 md:grid-cols-3 items-center justify-between w-full">
           <div className="city flex flex-col gap-2">
             <label
               htmlFor="city"
@@ -97,16 +97,21 @@ function BillFromForm() {
               className="font-bold h-12 rounded-md border-medium-gray/50 border-2 w-40 outline-none dark:bg-[#1E2139]"
             />
           </div>
+          <div className="country flex flex-col gap-2">
+            <label
+              htmlFor="country"
+              className="text-medium-gray font-bold text-sm"
+            >
+              Country
+            </label>
+            <input
+              type="text"
+              name="country"
+              id="country"
+              className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2  outline-none w-full md:w-auto"
+            />
+          </div>
         </div>
-        <label htmlFor="country" className="text-medium-gray font-bold text-sm">
-          Country
-        </label>
-        <input
-          type="text"
-          name="country"
-          id="country"
-          className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
-        />
       </form>
     </>
   )
@@ -117,44 +122,51 @@ function BillToForm() {
     <>
       <h2 className="font-bold text-[#7C5DFA]">Bill To </h2>
 
-      <form className="flex-col flex gap-5 mt-4">
-        <label
-          htmlFor="clientsName"
-          className="text-medium-gray font-bold text-sm"
-        >
-          Client's Name
-        </label>
-        <input
-          type="text"
-          name="clientsName"
-          id="clientsName"
-          className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
-        />
-        <label
-          htmlFor="clientsEmail"
-          className="text-medium-gray font-bold text-sm"
-        >
-          Client's Email
-        </label>
-        <input
-          type="text"
-          name="clientsEmail"
-          id="clientsEmail"
-          className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
-        />
-        <label
-          htmlFor="street-adress"
-          className="text-medium-gray font-bold text-sm"
-        >
-          Street Adress
-        </label>
-        <input
-          type="text"
-          name="street-adress"
-          id="street-adress"
-          className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
-        />
-        <div className="city-and-postcode flex items-center justify-between w-full">
+      <form className="gap-5 mt-4 flex flex-col">
+        <div className="client-name flex flex-col">
+          <label
+            htmlFor="clientsName"
+            className="text-medium-gray font-bold text-sm"
+          >
+            Client's Name
+          </label>
+          <input
+            type="text"
+            name="clientsName"
+            id="clientsName"
+            className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+          />
+        </div>
+        <div className="client-mail flex flex-col">
+          <label
+            htmlFor="clientsEmail"
+            className="text-medium-gray font-bold text-sm"
+          >
+            Client's Email
+          </label>
+          <input
+            type="text"
+            name="clientsEmail"
+            id="clientsEmail"
+            className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+          />
+        </div>
+        <div className="client-adress flex flex-col">
+          <label
+            htmlFor="street-adress"
+            className="text-medium-gray font-bold text-sm"
+          >
+            Street Adress
+          </label>
+          <input
+            type="text"
+            name="street-adress"
+            id="street-adress"
+            className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+          />
+        </div>
+
+        <div className="city-and-postcode  grid grid-cols-2 md:grid-cols-3 items-center justify-between w-full">
           <div className="city flex flex-col gap-2">
             <label
               htmlFor="city"
@@ -184,16 +196,21 @@ function BillToForm() {
               className="font-bold h-12 rounded-md border-medium-gray/50 border-2 w-40 outline-none dark:bg-[#1E2139]"
             />
           </div>
+          <div className="country flex flex-col gap-2">
+            <label
+              htmlFor="country"
+              className="text-medium-gray font-bold text-sm"
+            >
+              Country
+            </label>
+            <input
+              type="text"
+              name="country"
+              id="country"
+              className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 outline-none"
+            />
+          </div>
         </div>
-        <label htmlFor="country" className="text-medium-gray font-bold text-sm">
-          Country
-        </label>
-        <input
-          type="text"
-          name="country"
-          id="country"
-          className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
-        />
       </form>
     </>
   )
@@ -202,43 +219,49 @@ function BillToForm() {
 function InvoiceInfo() {
   return (
     <>
-      <form className="flex-col flex gap-5 mt-4">
-        <label
-          htmlFor="clientsName"
-          className="text-medium-gray font-bold text-sm"
-        >
-          Invoice Date
-        </label>
-        <input
-          type="date"
-          name="Invoicedate"
-          id="Invoicedate"
-          className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
-        />
-        <label
-          htmlFor="paymentterms"
-          className="text-medium-gray font-bold text-sm"
-        >
-          Payment Terms
-        </label>
-        <input
-          type="text"
-          name="paymentterms"
-          id="paymentterms"
-          className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
-        />
-        <label
-          htmlFor="projectdescription"
-          className="text-medium-gray font-bold text-sm"
-        >
-          Project Description
-        </label>
-        <input
-          type="text"
-          name="projectdescription"
-          id="projectdescription"
-          className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
-        />
+      <form className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
+        <div className="invoice-date flex flex-col">
+          <label
+            htmlFor="Invoicedate"
+            className="text-medium-gray font-bold text-sm"
+          >
+            Invoice Date
+          </label>
+          <input
+            type="date"
+            name="Invoicedate"
+            id="Invoicedate"
+            className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+          />
+        </div>
+        <div className="payment-terms flex flex-col">
+          <label
+            htmlFor="paymentterms"
+            className="text-medium-gray font-bold text-sm"
+          >
+            Payment Terms
+          </label>
+          <input
+            type="text"
+            name="paymentterms"
+            id="paymentterms"
+            className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+          />
+        </div>
+        <div className="project-description flex flex-col">
+          <label
+            htmlFor="projectdescription"
+            className="text-medium-gray font-bold text-sm"
+          >
+            Project Description
+          </label>
+          <input
+            type="text"
+            name="projectdescription"
+            id="projectdescription"
+            className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+          />
+        </div>
       </form>
     </>
   )
@@ -246,56 +269,57 @@ function InvoiceInfo() {
 
 function ItemNameForm() {
   return (
-    <>
-      <label
-        htmlFor="item-name"
-        className="text-medium-gray font-bold text-sm mt-6"
-      >
-        Item Name
-      </label>
-      <input
-        type="text"
-        name="item-name"
-        id="item-name"
-        className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
-      />
-      <div className="quantity-price-total-delete flex items-center gap-5  w-full ">
-        <div className="city flex flex-col gap-2">
-          <label
-            htmlFor="quantity"
-            className="text-medium-gray font-bold text-sm"
-          >
-            Qty.
-          </label>
-          <input
-            type="text"
-            name="quantity"
-            id="quantity"
-            className="font-bold h-12 rounded-md border-medium-gray/50 border-2 w-20 outline-none dark:bg-[#1E2139]"
-          />
-        </div>
-
-        <div className="price flex flex-col gap-2">
-          <label htmlFor="price" className="text-medium-gray font-bold text-sm">
-            Price
-          </label>
-          <input
-            type="text"
-            name="price"
-            id="price"
-            className="font-bold h-12 rounded-md border-medium-gray/50 border-2 w-20 outline-none dark:bg-[#1E2139]"
-          />
-        </div>
-        <div className="total flex flex-col  gap-5">
-          <label htmlFor="total" className="text-medium-gray font-bold text-sm">
-            Total
-          </label>
-          <p className="font-bold text-medium-gray">200.00</p>
-        </div>
-        <div className="delete ml-auto mt-6">
-          <img src={deleteicon} alt="delete" className="w-4 " />
-        </div>
+    <form className="grid items-center gap-5  grid-rows-2 grid-cols-2  md:grid-cols-5 ">
+      <div className="item-name flex flex-col col-span-4 md:col-span-1">
+        <label
+          htmlFor="item-name"
+          className="text-medium-gray font-bold text-sm mt-6"
+        >
+          Item Name
+        </label>
+        <input
+          type="text"
+          name="item-name"
+          id="item-name"
+          className="dark:bg-[#1E2139] font-bold h-12 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+        />
       </div>
-    </>
+
+      <div className="quantity flex flex-col mt-5">
+        <label
+          htmlFor="quantity"
+          className="text-medium-gray font-bold text-sm"
+        >
+          Qty.
+        </label>
+        <input
+          type="text"
+          name="quantity"
+          id="quantity"
+          className="font-bold h-12 rounded-md border-medium-gray/50 border-2 w-20 outline-none dark:bg-[#1E2139]"
+        />
+      </div>
+
+      <div className="price flex flex-col mt-4">
+        <label htmlFor="price" className="text-medium-gray font-bold text-sm">
+          Price
+        </label>
+        <input
+          type="text"
+          name="price"
+          id="price"
+          className="font-bold h-12 rounded-md border-medium-gray/50 border-2 w-20 outline-none dark:bg-[#1E2139]"
+        />
+      </div>
+      <div className="total flex flex-col  gap-5">
+        <label htmlFor="total" className="text-medium-gray font-bold text-sm">
+          Total
+        </label>
+        <p className="font-bold text-medium-gray">200.00</p>
+      </div>
+      <div className="delete ml-auto md:ml-0 mt-6">
+        <img src={deleteicon} alt="delete" className="w-4 " />
+      </div>
+    </form>
   )
 }
