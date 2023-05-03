@@ -36,8 +36,8 @@ function App() {
       </div>
       <Main />
       {/* <DeleteDialog /> */}
-      {/* <NewInvoiceDialog /> */}
-      <EditInvoiceDialog />
+      <NewInvoiceDialog />
+      {/* <EditInvoiceDialog /> */}
     </div>
   )
 }

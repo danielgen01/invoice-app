@@ -1,11 +1,19 @@
 import arrowdown from "../../../../../public/assets/icon-arrow-down.svg"
 import plus from "../../../../../public/assets/icon-plus.svg"
-import { useAppSelector } from "../../../../Redux/store"
+import { useAppSelector, useAppDispatch } from "../../../../Redux/store"
 import { RootState } from "../../../../Redux/rootReducer"
+import { toggleNewInvoiceForm } from "../../../../Redux/slices/NewInvoice/NewInvoiceSlice"
 
 export function TopMainSection() {
+  const dispatch = useAppDispatch()
   const data = useAppSelector((state: RootState) => state.data.Data)
-  console.log(data)
+  const isNewInvoiceFormOpen = useAppSelector(
+    (state: RootState) => state.newInvoice.isNewInvoiceFormOpen
+  )
+
+  const handleToggleNewInvoiceForm = () => {
+    dispatch(toggleNewInvoiceForm())
+  }
 
   return (
     <section className="mt-10 xl:mt-0">
@@ -28,7 +36,10 @@ export function TopMainSection() {
             </h1>
             <img src={arrowdown} alt="arrowdown" className="w-4" />
           </button>
-          <button className="bg-[#7C5DFA] px-4 py-2 flex  text-white items-center gap-2 rounded-full font-bold text-xl">
+          <button
+            className="bg-[#7C5DFA] px-4 py-2 flex  text-white items-center gap-2 rounded-full font-bold text-xl"
+            onClick={handleToggleNewInvoiceForm}
+          >
             <img
               src={plus}
               alt=""
