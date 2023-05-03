@@ -12,10 +12,12 @@ export function TopMainSection() {
           </p>
         </div>
         <section className="buttons flex items-center gap-4 xl:gap-20">
-          <button className="filter flex items-center gap-4 xl:whitespace-nowrap">
-            <h1 className="font-bold text-lg dark:text-white xl:whitespace-nowrap">
-              Filter <span className="hidden xl:block">by status</span>
-             
+          <button className="filter flex items-center justify-between gap-4 md:whitespace-nowrap">
+            <h1 className="font-bold text-lg dark:text-white md:whitespace-nowrap">
+              Filter{" "}
+              <span className="hidden md:block whitespace-nowrap">
+                by status
+              </span>
             </h1>
             <img src={arrowdown} alt="arrowdown" className="w-4" />
           </button>
@@ -25,7 +27,7 @@ export function TopMainSection() {
               alt=""
               className="bg-white px-4 py-4 rounded-full"
             />
-            New <span className="hidden xl:block">Invoice</span>
+            New <span className="hidden md:block">Invoice</span>
           </button>
         </section>
       </div>
