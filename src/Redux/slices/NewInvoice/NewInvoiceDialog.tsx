@@ -1,10 +1,12 @@
-import React from "react"
+import React, { useState } from "react"
 import arrowleft from "../../../../public/assets/icon-arrow-left.svg"
 import deleteicon from "../../../../public/assets/icon-delete.svg"
 import iconplus from "../../../../public/assets/icon-plus.svg"
 import { RootState } from "../../rootReducer"
 import { useAppSelector, useAppDispatch } from "../../store"
 import { toggleNewInvoiceForm } from "./NewInvoiceSlice"
+import { createNewInvoice } from "../Data/DataSlice"
+import { InvoiceType } from "../Data/DataSlice"
 
 const NewInvoiceDialog = () => {
   const dispatch = useAppDispatch()
@@ -16,6 +18,7 @@ const NewInvoiceDialog = () => {
   const handleToggleNewInvoiceForm = () => {
     dispatch(toggleNewInvoiceForm())
   }
+
   return (
     <>
       <div
@@ -78,7 +81,7 @@ const NewInvoiceDialog = () => {
 
 export default NewInvoiceDialog
 
-function BillFromForm() {
+const BillFromForm: React.FC = () => {
   return (
     <>
       <h2 className="font-bold text-[#7C5DFA] ">Bill from </h2>
