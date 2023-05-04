@@ -126,10 +126,10 @@ function StatusBox() {
   return (
     <div className="status-box h-24 bg-white dark:bg-[#252945] shadow-md mt-5 rounded-xl">
       <div className="status-box-content px-2 py-7  grid grid-cols-2 md:grid-cols-5 md:gap-2">
-        <h1 className="font-bold text-medium-gray">{activeInvoice.status}</h1>
+        <h1 className="font-bold text-medium-gray capitalize">{activeInvoice.status}</h1>
         <div className="status-box flex gap-4 items-center bg-green-500/20 justify-center w-[80%] py-2 rounded-md">
-          <BsCircleFill className="text-green-500 text-sm" />
-          <p className="text-green-500 font-bold text-sm">
+          <BsCircleFill className="text-green-500 text-sm " />
+          <p className="text-green-500 font-bold text-sm capitalize">
             {activeInvoice.status}
           </p>
         </div>
@@ -281,7 +281,7 @@ function TotalBox() {
     <section className="total-box min-h-[80px] bg-[#1E2139] rounded-b-xl dark:bg-black">
       <div className="total-content py-10 px-10 grid grid-cols-2 text-white ">
         <div className="total-title">
-          <h1>Grand Total</h1>
+          <h1 className="font-semibold">Grand Total</h1>
         </div>
         <div className="total-sum flex justify-end  font-bold">
           <h1 className="text-xl">€ {grandTotal}</h1>

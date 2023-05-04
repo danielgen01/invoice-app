@@ -92,7 +92,7 @@ const InvoiceRow: React.FC<props> = ({
               <div
                 className={`status-batch w-3 h-3 bg-${batchColor} rounded-full`}
               ></div>
-              <h1 className={`text-${batchColor} font-bold`}>{status}</h1>
+              <h1 className={`text-${batchColor} font-bold capitalize`}>{status}</h1>
             </div>
             <img src={arrowRight} alt="" className="hidden xl:block w-4 " />
           </section>
