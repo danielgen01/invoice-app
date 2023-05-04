@@ -1,24 +1,81 @@
-import { createSlice } from "@reduxjs/toolkit";
-import Data from "./data.json";
+import { createSlice } from "@reduxjs/toolkit"
+import Data from "./data.json"
+
+export type InvoiceType = {
+  id: string
+  createdAt: string
+  paymentDue: string
+  description: string
+  paymentTerms: number
+  clientName: string
+  clientEmail: string
+  status: string
+  senderAddress: {
+    street: string
+    city: string
+    postCode: string
+    country: string
+  }
+  clientAddress: {
+    street: string
+    city: string
+    postCode: string
+    country: string
+  }
+  items: Array<{
+    name: string
+    quantity: number
+    price: number
+    total: number
+  }>
+  total: number
+}
+
+export const emptyInvoice: InvoiceType = {
+  id: "",
+  createdAt: "",
+  paymentDue: "",
+  description: "",
+  paymentTerms: 0,
+  clientName: "",
+  clientEmail: "",
+  status: "",
+  senderAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  clientAddress: {
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  },
+  items: [],
+  total: 0,
+};
+
 
 const dataSlice = createSlice({
   name: "Data",
   initialState: {
     Data: Data,
+    activeInvoice: emptyInvoice,
   },
   reducers: {
-    // Define your reducers here
+    setActiveInvoice: (state, action) => {
+      state.activeInvoice = action.payload
+    },
+    resetActiveInvoice: (state) => {
+      state.activeInvoice = emptyInvoice
+    },
   },
-  // Optional: Add extraReducers for handling actions from other slices
-  // extraReducers: (builder) => {
-  //   builder.addCase(someOtherAction, (state, action) => {
-  //     // Do something with the state and action
-  //   });
-  // },
-});
+})
 
+// Export
 // Export reducer directly
-export default dataSlice.reducer;
+export default dataSlice.reducer
 
 // Export actions for use in components
-export const { /* yourAction1, yourAction2 */ } = dataSlice.actions;
+export const { setActiveInvoice, resetActiveInvoice } = dataSlice.actions

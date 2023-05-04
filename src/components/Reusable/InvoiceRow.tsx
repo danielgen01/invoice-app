@@ -1,7 +1,12 @@
-import React from "react"
+import React, { useEffect } from "react"
 import arrowRight from "../../../public/assets/icon-arrow-right.svg"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { Link } from "react-router-dom"
+import {
+  setActiveInvoice,
+  resetActiveInvoice,
+} from "../../Redux/slices/Data/DataSlice"
+import { RootState } from "../../Redux/rootReducer"
 
 type props = {
   invoiceId: string
@@ -18,9 +23,9 @@ const InvoiceRow: React.FC<props> = ({
   clientName,
   status,
 }) => {
+  const data = useAppSelector((state: RootState) => state.data.Data)
   const dispatch = useAppDispatch()
 
-  
   let batchColor: string
 
   switch (status) {
@@ -37,8 +42,31 @@ const InvoiceRow: React.FC<props> = ({
       batchColor = "gray-500/20"
   }
 
+  const activeInvoice = useAppSelector(
+    (state: RootState) => state.data.activeInvoice
+  )
+
+  const handleSetActiveInvoice = (invoiceId: any) => {
+    const invoice = data.find((invoice) => invoice.id === invoiceId)
+    if (invoice) {
+      dispatch(setActiveInvoice(invoice))
+      
+    }
+  
+  }  
+ 
+  
+
+  // Reset active invoice
+  const handleResetActiveInvoice = () => {
+    dispatch(resetActiveInvoice())
+  }
+
   return (
-    <Link to={`/invoice/${invoiceId}`}>
+    <Link
+      to={`/invoice/${invoiceId}`}
+      onClick={() => handleSetActiveInvoice(invoiceId)}
+    >
       <div className="row h-40  bg-white shadow-md rounded-lg dark:bg-[#1E2139]  w-[300px] md:w-[800px] xl:w-[900px] md:h-20 cursor-pointer hover:animate-pulse">
         <div className="content px-5 py-5 grid grid-cols-2 justify-between w-full md:items-center">
           {/* FIRST GRID COL */}
