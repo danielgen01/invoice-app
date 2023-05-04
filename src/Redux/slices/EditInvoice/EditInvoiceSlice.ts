@@ -1,23 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-interface newInvoiceFormState {
-  isNewInvoiceFormOpen: boolean
+interface editInvoiceFormState {
+  isEditInvoiceFormOpen: boolean
 }
 
-const initialState: newInvoiceFormState = {
-  isNewInvoiceFormOpen: false,
+const initialState: editInvoiceFormState = {
+  isEditInvoiceFormOpen: false,
 }
 
-const newInvoiceForm = createSlice({
-  name: "newInvoiceForm",
+const editInvoiceForm = createSlice({
+  name: "editInvoiceForm",
   initialState,
   reducers: {
-    toggleNewInvoiceForm: (state) => {
-      state.isNewInvoiceFormOpen = !state.isNewInvoiceFormOpen
+    toggleEditInvoiceForm: (state) => {
+      state.isEditInvoiceFormOpen = !state.isEditInvoiceFormOpen
     },
   },
 })
 
-export const { toggleNewInvoiceForm } = newInvoiceForm.actions
+export const { toggleEditInvoiceForm } = editInvoiceForm.actions
 
-export default newInvoiceForm.reducer
+export default editInvoiceForm.reducer

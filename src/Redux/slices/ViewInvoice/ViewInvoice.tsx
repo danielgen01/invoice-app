@@ -4,15 +4,26 @@ import { BsCircleFill } from "react-icons/bs"
 import { RootState } from "../../rootReducer"
 import { useAppSelector, useAppDispatch } from "../../store"
 import { useNavigate } from "react-router-dom"
+import { toggleEditInvoiceForm } from "../EditInvoice/EditInvoiceSlice"
 
 type props = {
   invoiceId: any
 }
 const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
+  const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
   const handleGoBack = () => {
     navigate("/")
+  }
+
+  const isEditInvoiceFormOpen = useAppSelector(
+    (state: RootState) => state.newInvoice.isNewInvoiceFormOpen
+  )
+
+  const handleToggleEditInvoiceForm = () => {
+    dispatch(toggleEditInvoiceForm())
+    console.log(isEditInvoiceFormOpen)
   }
 
   return (
@@ -53,7 +64,10 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
         </div>
         <footer className="block md:hidden bg-white  mt-20 dark:bg-[#1E2139]">
           <div className="footer-content px-5 py-5 flex justify-between items-center">
-            <button className="md:hidden  w-20 h-10 bg-[#F8F8FB] rounded-full text-[#9277FF] font-bold dark:bg-[#252945] dark:text-medium-gray">
+            <button
+              className="md:hidden  w-20 h-10 bg-[#F8F8FB] rounded-full text-[#9277FF] font-bold dark:bg-[#252945] dark:text-medium-gray"
+              onClick={handleToggleEditInvoiceForm}
+            >
               Edit
             </button>
             <button className="md:hidden  w-20 h-12 bg-[#EC5757] rounded-full text-white font-bold">
@@ -72,6 +86,11 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
 export default ViewInvoice
 
 function StatusBox() {
+  const dispatch = useAppDispatch()
+
+  const handleToggleEditInvoiceForm = () => {
+    dispatch(toggleEditInvoiceForm())
+  }
   return (
     <div className="status-box h-24 bg-white dark:bg-[#252945] shadow-md mt-5 rounded-xl">
       <div className="status-box-content px-2 py-7  grid grid-cols-2 md:grid-cols-5 md:gap-2">
@@ -81,7 +100,10 @@ function StatusBox() {
           <p className="text-orange-500 font-bold text-sm">Pending</p>
         </div>
 
-        <button className="hidden md:block  py-3 bg-[#F8F8FB] rounded-full text-[#9277FF] font-bold">
+        <button
+          className="hidden md:block  py-3 bg-[#F8F8FB] rounded-full text-[#9277FF] font-bold"
+          onClick={handleToggleEditInvoiceForm}
+        >
           Edit
         </button>
         <button className="hidden md:block  py-3 bg-[#EC5757] rounded-full text-white font-bold">

@@ -2,19 +2,40 @@ import React from "react"
 import arrowleft from "../../../../public/assets/icon-arrow-left.svg"
 import deleteicon from "../../../../public/assets/icon-delete.svg"
 import iconplus from "../../../../public/assets/icon-plus.svg"
+import { toggleEditInvoiceForm } from "./EditInvoiceSlice"
+import { useAppDispatch, useAppSelector } from "../../store"
+import { RootState } from "../../rootReducer"
 
 const EditInvoiceDialog = () => {
+  const dispatch = useAppDispatch()
+
+  const handleToggleEditInvoiceForm = () => {
+    dispatch(toggleEditInvoiceForm())
+  }
+
+  const isEditInvoiceFormOpen = useAppSelector(
+    (state: RootState) => state.editInvoice.isEditInvoiceFormOpen
+  )
+
   return (
     <>
-      <div className="overlay background fixed top-0 left-0 bg-black/50 w-screen h-screen  md:block"></div>
+      <div
+        className="overlay background fixed top-0 left-0 bg-black/50 w-screen h-screen  md:block cursor-pointer"
+        onClick={handleToggleEditInvoiceForm}
+        style={{ display: isEditInvoiceFormOpen ? "block" : "none" }}
+      ></div>
       <dialog
         className=" New Invoice Modal px-5  py-5  flex flex-col gap-6 bg-[#F8F8FB]
        dark:bg-[#0C0E16] dark:text-white 
         md:w-[80%] absolute top-0 md:px-10
-         xl:w-[30%] xl:ml-20 xl:max-h-screen xl:gap-0 xl:py-0 
+         xl:w-[30%] xl:ml-20 xl:max-h-screen xl:gap-0 xl:py-0  
           "
+        style={{ display: isEditInvoiceFormOpen ? "block" : "none" }}
       >
-        <button className="go-back-button flex items-center gap-5 md:hidden ">
+        <button
+          className="go-back-button flex items-center gap-5 md:hidden "
+          onClick={handleToggleEditInvoiceForm}
+        >
           <img src={arrowleft} alt="goback" className="w-2" />
           <h1 className="font-bold">Go back</h1>
         </button>
@@ -38,9 +59,12 @@ const EditInvoiceDialog = () => {
           </button>
         </section>
 
-        <div className="bg-white h-20 dark:bg-[#1E2139]">
+        <div className="bg-white h-14 dark:bg-[#1E2139]">
           <div className="footer-content-buttons flex items-center gap-2 w-full h-full px-4 justify-end">
-            <button className="text-[#9277FF] font-bold bg-[#DFE3FA] px-5 py-3 rounded-full dark:text-white dark:bg-[#252945]">
+            <button
+              className="text-[#9277FF] font-bold bg-[#DFE3FA] px-5 py-3 rounded-full dark:text-white dark:bg-[#252945]"
+              onClick={handleToggleEditInvoiceForm}
+            >
               Cancel
             </button>
 
