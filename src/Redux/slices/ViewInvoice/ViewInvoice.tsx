@@ -5,6 +5,7 @@ import { RootState } from "../../rootReducer"
 import { useAppSelector, useAppDispatch } from "../../store"
 import { useNavigate } from "react-router-dom"
 import { toggleEditInvoiceForm } from "../EditInvoice/EditInvoiceSlice"
+import { toggleDeleteInvoiceForm } from "../DeleteDialog/DeleteDialogSlice"
 
 type props = {
   invoiceId: any
@@ -21,9 +22,18 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
     (state: RootState) => state.newInvoice.isNewInvoiceFormOpen
   )
 
+  const isDeleteFormOpen = useAppSelector(
+    (state: RootState) => state.deleteInvoice.isDeleteInvoiceFormOpen
+  )
+
   const handleToggleEditInvoiceForm = () => {
     dispatch(toggleEditInvoiceForm())
     console.log(isEditInvoiceFormOpen)
+  }
+
+  const handleToggleDeleteInvoiceForm = () => {
+    dispatch(toggleDeleteInvoiceForm())
+    console.log(isDeleteFormOpen)
   }
 
   return (
@@ -70,7 +80,10 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
             >
               Edit
             </button>
-            <button className="md:hidden  w-20 h-12 bg-[#EC5757] rounded-full text-white font-bold">
+            <button
+              className="md:hidden  w-20 h-12 bg-[#EC5757] rounded-full text-white font-bold"
+              onClick={handleToggleDeleteInvoiceForm}
+            >
               Delete
             </button>
             <button className="md:hidden w-32 h-12  bg-[#7C5DFA] rounded-full text-white font-bold">
@@ -91,6 +104,10 @@ function StatusBox() {
   const handleToggleEditInvoiceForm = () => {
     dispatch(toggleEditInvoiceForm())
   }
+
+  const handleToggleDeleteInvoiceForm = () => {
+    dispatch(toggleDeleteInvoiceForm())
+  }
   return (
     <div className="status-box h-24 bg-white dark:bg-[#252945] shadow-md mt-5 rounded-xl">
       <div className="status-box-content px-2 py-7  grid grid-cols-2 md:grid-cols-5 md:gap-2">
@@ -106,7 +123,10 @@ function StatusBox() {
         >
           Edit
         </button>
-        <button className="hidden md:block  py-3 bg-[#EC5757] rounded-full text-white font-bold">
+        <button
+          className="hidden md:block  py-3 bg-[#EC5757] rounded-full text-white font-bold"
+          onClick={handleToggleDeleteInvoiceForm}
+        >
           Delete
         </button>
         <button className="hidden md:block  py-3 bg-[#7C5DFA] rounded-full text-white font-bold">

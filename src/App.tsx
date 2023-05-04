@@ -38,8 +38,8 @@ function App() {
             element={
               <div>
                 <ViewInvoicePage />
-                {/* <DeleteDialog /> */}
-                 <EditInvoiceDialog />
+                <DeleteDialog />
+                <EditInvoiceDialog />
               </div>
             }
           />
@@ -61,10 +61,6 @@ function App() {
                 </div>
                 <Main />
                 <NewInvoiceDialog />
-                
-
-               
-                
               </div>
             }
           />
