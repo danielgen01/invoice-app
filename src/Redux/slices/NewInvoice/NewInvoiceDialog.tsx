@@ -440,38 +440,43 @@ const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
             Payment Terms
           </label>
           <Listbox
-            value={invoiceInfoData.paymentTerms}
-            onChange={(value) =>
-              setInvoiceInfoData({ ...invoiceInfoData, paymentTerms: value })
-            }
-          >
-            <Listbox.Button
-              className="dark:bg-[#1E2139] font-bold h-12 xl:h-10 rounded-md border-medium-gray/50
-             border-2 px-4 outline-none flex items-center justify-between "
-            >
-              {paymentTermOptions[0].label}
-              <img src={arrowDown} />
-            </Listbox.Button>
-            <Listbox.Options
-              className="absolute w-auto 
-            mt-20 bg-white dark:bg-[#1E2139]
-             rounded-md shadow-lg max-h-60 overflow-auto float-right"
-            >
-              {paymentTermOptions.map((option, optionIdx) => (
-                <Listbox.Option
-                  key={optionIdx}
-                  value={option.value}
-                  className={({ active }) =>
-                    `${active ? "bg-medium-gray/50 dark:bg-opacity-20" : ""}
-           hover:bg-medium-gray/50 dark:hover:bg-opacity-20
-           px-4 py-2 font-bold text-sm hover:text-[#7C5DFA]`
-                  }
-                >
-                  {option.label}
-                </Listbox.Option>
-              ))}
-            </Listbox.Options>
-          </Listbox>
+  value={invoiceInfoData.paymentTerms}
+  onChange={(value) =>
+    setInvoiceInfoData({ ...invoiceInfoData, paymentTerms: value })
+  }
+>
+  <Listbox.Button
+    className="dark:bg-[#1E2139] font-bold h-12 xl:h-10 rounded-md border-medium-gray/50
+   border-2 px-4 outline-none flex items-center justify-between "
+  >
+    {
+      paymentTermOptions.find(
+        (option) => option.value === invoiceInfoData.paymentTerms
+      )?.label || "Wählen Sie eine Option"
+    }
+    <img src={arrowDown} />
+  </Listbox.Button>
+  <Listbox.Options
+    className="absolute w-auto 
+  mt-20 bg-white dark:bg-[#1E2139]
+   rounded-md shadow-lg max-h-60 overflow-auto float-right"
+  >
+    {paymentTermOptions.map((option, optionIdx) => (
+      <Listbox.Option
+        key={optionIdx}
+        value={option.value}
+        className={({ active }) =>
+          `${active ? "bg-medium-gray/50 dark:bg-opacity-20" : ""}
+     hover:bg-medium-gray/50 dark:hover:bg-opacity-20
+     px-4 py-2 font-bold text-sm hover:text-[#7C5DFA]`
+        }
+      >
+        {option.label}
+      </Listbox.Option>
+    ))}
+  </Listbox.Options>
+</Listbox>
+
         </div>
         <div className="project-description flex flex-col">
           <label
