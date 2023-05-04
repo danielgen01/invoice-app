@@ -66,15 +66,15 @@ const NewInvoiceDialog = () => {
   }
 
   const handleAddInvoice = () => {
-    const newInvoice = {
+    const newInvoice:InvoiceType = {
       id: Math.floor(Math.random() * 1_00_00).toString(), // Generieren Sie hier eine eindeutige ID für die Rechnung
       createdAt: invoiceInfoData.date,
-      paymentDue: invoiceInfoData.date + invoiceInfoData.paymentTerms, // Passen Sie das Zahlungsfälligkeitsdatum entsprechend an
-      description: invoiceInfoData.projectDescription,
+      paymentDue: invoiceInfoData.date + invoiceInfoData.paymentTerms,
       paymentTerms: invoiceInfoData.paymentTerms,
       clientName: billToData.clientName,
       clientEmail: billToData.clientEmail,
-      status: "pending", // Setzen Sie den Status entsprechend
+      description: invoiceInfoData.projectDescription,
+      status: "pending", 
       senderAddress: {
         street: billFromData.street,
         city: billFromData.city,
