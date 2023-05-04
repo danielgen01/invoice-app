@@ -61,11 +61,11 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
           <h1 className="font-bold dark:text-white">Go back</h1>
         </button>
         <StatusBox />
-        <div className="invoice-box bg-white  mt-5 shadow-md rounded-xl dark:bg-[#252945]">
+        <div className="invoice-box bg-white   mt-5 shadow-md rounded-xl dark:bg-[#252945]">
           <section className="invoice-details-content md:py-10">
             <TitleAndAdress />
             <InvoiceInfos />
-            <section className="price-overview bg-[#F8F8FB] w-full min-h-[300px] mt-4 rounded-xl">
+            <section className="price-overview bg-[#F8F8FB] dark:bg-[#252945] w-full min-h-[300px] mt-4 rounded-xl">
               <div className="headline hidden md:grid md:grid-cols-4 px-5 dark:bg-[#252945] ">
                 <h1 className="font-bold text-medium-gray">Item Name</h1>
                 <h1 className="font-bold text-medium-gray flex justify-center">
