@@ -6,7 +6,7 @@ const ViewInvoice = () => {
   return (
     <>
       <div className="overlay"> </div>
-      <main className="content px-5 py-5 xl:px-72 lg:py-10">
+      <body className="content px-5 py-5 xl:px-72 lg:py-10">
         <button
           className="go-back-button flex items-center gap-5 "
           //   onClick={handleToggleNewInvoiceForm}
@@ -16,7 +16,7 @@ const ViewInvoice = () => {
         </button>
         <StatusBox />
         <div className="invoice-box bg-white  mt-5 shadow-md rounded-xl ">
-          <div className="invoice-details-content md:py-10">
+          <section className="invoice-details-content md:py-10">
             <TitleAndAdress />
             <InvoiceInfos />
             <section className="price-overview bg-[#F8F8FB] w-full min-h-[300px] mt-5 rounded-xl">
@@ -37,9 +37,22 @@ const ViewInvoice = () => {
               </ul>
               <TotalBox />
             </section>
-          </div>
+          </section>
         </div>
-      </main>
+        <footer className="block md:hidden bg-white  mt-20">
+          <div className="footer-content px-5 py-5 flex justify-between">
+            <button className="md:hidden  py-3 px-6 bg-[#F8F8FB] rounded-full text-[#9277FF] font-bold">
+              Edit
+            </button>
+            <button className="md:hidden  py-3 px-6 bg-[#EC5757] rounded-full text-white font-bold">
+              Delete
+            </button>
+            <button className="md:hidden  py-3 px-6  bg-[#7C5DFA] rounded-full text-white font-bold">
+              Mark as Paid
+            </button>
+          </div>
+        </footer>
+      </body>
     </>
   )
 }

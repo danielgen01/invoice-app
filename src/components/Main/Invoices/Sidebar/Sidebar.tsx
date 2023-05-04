@@ -15,7 +15,7 @@ type props = {
 const Sidebar: React.FC<props> = ({ toggleDarkMode, isDarkMode }) => {
   return (
     <>
-      <div className="text-6xl w-24 h-screen bg-[#252945] fixed">
+      <aside className="text-6xl w-24 h-screen bg-[#252945] fixed">
         <div className="nav-content flex flex-col justify-between items-center pb-10 h-full">
           <figure className="logo flex justify-center items-center bg-[#7C5DFA] w-32 -ml-8 rounded-3xl h-24">
             <img src={Logo} alt="Logo" className="" />
@@ -44,7 +44,7 @@ const Sidebar: React.FC<props> = ({ toggleDarkMode, isDarkMode }) => {
             </figure>
           </section>
         </div>
-      </div>
+      </aside>
     </>
   )
 }
