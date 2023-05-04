@@ -81,8 +81,5 @@ const dataSlice = createSlice({
 export default dataSlice.reducer
 
 // Export actions for use in components
-export const {
-   setActiveInvoice,
-   resetActiveInvoice,
-   createNewInvoice } =
+export const { setActiveInvoice, resetActiveInvoice, createNewInvoice } =
   dataSlice.actions

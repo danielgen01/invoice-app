@@ -1,8 +1,4 @@
-import { itemNameFormProps } from "./ItemNameForm"
-import { InvoiceInfoProps } from "./InvoiceInfoForm"
-import { BillToProps } from "./BillToForm"
-import React, { useState } from "react"
-import deleteicon from "../../../../public/assets/icon-delete.svg"
+import { useState } from "react"
 import iconplus from "../../../../public/assets/icon-plus.svg"
 import { RootState } from "../../rootReducer"
 import { useAppSelector, useAppDispatch } from "../../store"
@@ -12,9 +8,9 @@ import { InvoiceType } from "../Data/DataSlice"
 import BillFromForm from "./BillFromForm"
 import BillToForm from "./BillToForm"
 import InvoiceInfo from "./InvoiceInfoForm"
-import ItemNameForm from "./ItemNameForm"
 import GoBackButton from "./GoBackButton"
 import { FooterButtons } from "./FooterButtons"
+import { ItemList } from "./ItemList"
 
 const NewInvoiceDialog = () => {
   const dispatch = useAppDispatch()
@@ -134,37 +130,13 @@ const NewInvoiceDialog = () => {
           invoiceInfoData={invoiceInfoData}
           setInvoiceInfoData={setInvoiceInfoData}
         />
-        <section
-          className="flex flex-col gap-2 Itemlist 
-        overflow-y-scroll h-60"
-        >
-          <h1 className="font-bold text-medium-gray text-xl ">Item List</h1>
-
-          {itemForms.map((item: any) => (
-            <ItemNameForm
-              key={item.id}
-              id={item.id}
-              removeItem={removeItem}
-              itemData={item}
-              setItemData={(updatedItemData: any) =>
-                setItemForms(
-                  itemForms.map((itemForm: any) =>
-                    itemForm.id === item.id ? updatedItemData : itemForm
-                  )
-                )
-              }
-            />
-          ))}
-          <button
-            className="flex items-center justify-center gap-2 bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]"
-            onClick={addItem}
-          >
-            <img src={iconplus} alt="add" />
-            <span className="font-bold text-[#9277FF] dark:text-white">
-              Add new Item
-            </span>
-          </button>
-        </section>
+        <ItemList
+          removeItem={removeItem}
+          setItemForms={setItemForms}
+          addItem={addItem}
+          iconplus={iconplus}
+          itemForms={itemForms}
+        />
 
         <FooterButtons handleAddInvoice={handleAddInvoice} />
       </dialog>
