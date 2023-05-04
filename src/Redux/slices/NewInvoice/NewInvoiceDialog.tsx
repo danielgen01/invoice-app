@@ -19,7 +19,7 @@ const NewInvoiceDialog = () => {
   return (
     <>
       <div
-        className="overlay background fixed top-0 left-0 bg-black/50 w-screen h-screen  md:block cursor-pointer"
+        className="overlay background fixed top-0 left-0 bg-black/50  dark:bg-black/20 w-screen h-screen  md:block cursor-pointer"
         style={{ display: isNewInvoiceFormOpen ? "block" : "none" }}
         onClick={handleToggleNewInvoiceForm}
       ></div>
