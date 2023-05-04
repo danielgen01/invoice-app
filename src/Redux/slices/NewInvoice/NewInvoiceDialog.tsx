@@ -11,12 +11,91 @@ import { InvoiceType } from "../Data/DataSlice"
 const NewInvoiceDialog = () => {
   const dispatch = useAppDispatch()
 
+  // global States
+
   const isNewInvoiceFormOpen = useAppSelector(
     (state: RootState) => state.newInvoice.isNewInvoiceFormOpen
   )
 
+  // States
+
+  const [itemForms, setItemForms] = useState<any>([
+    {
+      id: "",
+      name: "",
+      quantity: 0,
+      price: 0,
+      total: 0,
+    },
+  ])
+
+  const [billFromData, setBillFromData] = useState({
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  })
+
+  const [billToData, setBillToData] = useState({
+    clientName: "",
+    clientEmail: "",
+    street: "",
+    city: "",
+    postCode: "",
+    country: "",
+  })
+
+  const [invoiceInfoData, setInvoiceInfoData] = useState({
+    date: "",
+    paymentTerms: 0,
+    projectDescription: "",
+  })
+
+  // Functions
+
   const handleToggleNewInvoiceForm = () => {
     dispatch(toggleNewInvoiceForm())
+  }
+
+  const addItem = () => {
+    setItemForms([...itemForms, { id: new Date().getTime() }])
+  }
+
+  const removeItem = (id: number) => {
+    setItemForms(itemForms.filter((item: any) => item.id !== id))
+  }
+
+  const handleAddInvoice = () => {
+    const newInvoice = {
+      id: Math.floor(Math.random() * 1_00_00).toString(), // Generieren Sie hier eine eindeutige ID für die Rechnung
+      createdAt: invoiceInfoData.date,
+      paymentDue: invoiceInfoData.date + invoiceInfoData.paymentTerms, // Passen Sie das Zahlungsfälligkeitsdatum entsprechend an
+      description: invoiceInfoData.projectDescription,
+      paymentTerms: invoiceInfoData.paymentTerms,
+      clientName: billToData.clientName,
+      clientEmail: billToData.clientEmail,
+      status: "pending", // Setzen Sie den Status entsprechend
+      senderAddress: {
+        street: billFromData.street,
+        city: billFromData.city,
+        postCode: billFromData.postCode,
+        country: billFromData.country,
+      },
+      clientAddress: {
+        street: billToData.street,
+        city: billToData.city,
+        postCode: billToData.postCode,
+        country: billToData.country,
+      },
+      items: itemForms,
+      total: itemForms.reduce(
+        (acc: any, item: { total: any }) => acc + item.total,
+        0
+      ),
+    }
+
+    dispatch(createNewInvoice(newInvoice))
+    handleToggleNewInvoiceForm()
   }
 
   return (
@@ -45,15 +124,25 @@ const NewInvoiceDialog = () => {
           New Invoice
         </h1>
 
-        <BillFromForm />
-        <BillToForm />
-        <InvoiceInfo />
+        <BillFromForm
+          billFromData={billFromData}
+          setBillFromData={setBillFromData}
+        />
+        <BillToForm billToData={billToData} setBillToData={setBillToData} />
+        <InvoiceInfo
+          invoiceInfoData={invoiceInfoData}
+          setInvoiceInfoData={setInvoiceInfoData}
+        />
         <section className="flex flex-col gap-2 Itemlist overflow-y-scroll h-60">
           <h1 className="font-bold text-medium-gray text-xl ">Item List</h1>
 
-          <ItemNameForm />
-          {/* <ItemNameForm /> */}
-          <button className="flex items-center justify-center gap-2 bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]">
+          {itemForms.map((item: any) => (
+            <ItemNameForm key={item.id} id={item.id} removeItem={removeItem} />
+          ))}
+          <button
+            className="flex items-center justify-center gap-2 bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]"
+            onClick={addItem}
+          >
             <img src={iconplus} alt="add" />
             <span className="font-bold text-[#9277FF] dark:text-white">
               Add new Item
@@ -69,7 +158,10 @@ const NewInvoiceDialog = () => {
             <button className="text-medium-gray font-bold bg-[#252945] px-5 py-3 rounded-full dark:bg-[#888EB0] dark:text-white">
               Save as Draft
             </button>
-            <button className="text-white font-bold bg-[#7C5DFA] px-5 py-3 rounded-full">
+            <button
+              className="text-white font-bold bg-[#7C5DFA] px-5 py-3 rounded-full"
+              onClick={handleAddInvoice}
+            >
               Save & Send
             </button>
           </div>
@@ -81,7 +173,23 @@ const NewInvoiceDialog = () => {
 
 export default NewInvoiceDialog
 
-const BillFromForm: React.FC = () => {
+type BillFromProps = {
+  billFromData: any
+  setBillFromData: any
+}
+
+const BillFromForm: React.FC<BillFromProps> = ({
+  billFromData,
+  setBillFromData,
+}) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof typeof billFromData
+  ) => {
+    setBillFromData({ ...billFromData, [field]: e.target.value })
+    console.log(billFromData)
+  }
+
   return (
     <>
       <h2 className="font-bold text-[#7C5DFA] ">Bill from </h2>
@@ -97,6 +205,8 @@ const BillFromForm: React.FC = () => {
           name="street-adress"
           id="street-adress"
           className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none xl:h-10"
+          value={billFromData.street}
+          onChange={(e) => handleInputChange(e, "street")}
         />
         <div className="city-and-postcode grid grid-cols-2 md:grid-cols-3 items-center justify-between w-full">
           <div className="city flex flex-col gap-2">
@@ -111,6 +221,8 @@ const BillFromForm: React.FC = () => {
               name="city"
               id="city"
               className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40 outline-none dark:bg-[#1E2139]"
+              value={billFromData.city}
+              onChange={(e) => handleInputChange(e, "city")}
             />
           </div>
 
@@ -126,6 +238,8 @@ const BillFromForm: React.FC = () => {
               name="postcode"
               id="postcode"
               className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40 outline-none dark:bg-[#1E2139]"
+              value={billFromData.postCode}
+              onChange={(e) => handleInputChange(e, "postCode")}
             />
           </div>
           <div className="country flex flex-col gap-2">
@@ -140,6 +254,8 @@ const BillFromForm: React.FC = () => {
               name="country"
               id="country"
               className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2  outline-none w-full md:w-auto"
+              value={billFromData.country}
+              onChange={(e) => handleInputChange(e, "country")}
             />
           </div>
         </div>
@@ -148,7 +264,19 @@ const BillFromForm: React.FC = () => {
   )
 }
 
-function BillToForm() {
+type BillToProps = {
+  billToData: any
+  setBillToData: any
+}
+
+const BillToForm: React.FC<BillToProps> = ({ billToData, setBillToData }) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof typeof billToData
+  ) => {
+    setBillToData({ ...billToData, [field]: e.target.value })
+    console.log(billToData)
+  }
   return (
     <>
       <h2 className="font-bold text-[#7C5DFA]">Bill To </h2>
@@ -166,6 +294,8 @@ function BillToForm() {
             name="clientsName"
             id="clientsName"
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            value={billToData.clientName}
+            onChange={(e) => handleInputChange(e, "clientName")}
           />
         </div>
         <div className="client-mail flex flex-col">
@@ -180,6 +310,8 @@ function BillToForm() {
             name="clientsEmail"
             id="clientsEmail"
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            value={billToData.clientEmail}
+            onChange={(e) => handleInputChange(e, "clientEmail")}
           />
         </div>
         <div className="client-adress flex flex-col">
@@ -194,6 +326,8 @@ function BillToForm() {
             name="street-adress"
             id="street-adress"
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            value={billToData.street}
+            onChange={(e) => handleInputChange(e, "street")}
           />
         </div>
 
@@ -210,6 +344,8 @@ function BillToForm() {
               name="city"
               id="city"
               className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40 outline-none dark:bg-[#1E2139]"
+              value={billToData.city}
+              onChange={(e) => handleInputChange(e, "city")}
             />
           </div>
 
@@ -225,6 +361,8 @@ function BillToForm() {
               name="postcode"
               id="postcode"
               className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40 outline-none dark:bg-[#1E2139]"
+              value={billToData.postCode}
+              onChange={(e) => handleInputChange(e, "postCode")}
             />
           </div>
           <div className="country flex flex-col gap-2">
@@ -239,6 +377,8 @@ function BillToForm() {
               name="country"
               id="country"
               className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 outline-none"
+              value={billToData.country}
+              onChange={(e) => handleInputChange(e, "country")}
             />
           </div>
         </div>
@@ -247,7 +387,23 @@ function BillToForm() {
   )
 }
 
-function InvoiceInfo() {
+type InvoiceInfoProps = {
+  invoiceInfoData: any
+  setInvoiceInfoData: any
+}
+
+const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
+  invoiceInfoData,
+  setInvoiceInfoData,
+}) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof typeof invoiceInfoData
+  ) => {
+    setInvoiceInfoData({ ...invoiceInfoData, [field]: e.target.value })
+    console.log(invoiceInfoData)
+  }
+
   return (
     <>
       <form className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
@@ -263,6 +419,8 @@ function InvoiceInfo() {
             name="Invoicedate"
             id="Invoicedate"
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            value={invoiceInfoData.date}
+            onChange={(e) => handleInputChange(e, "date")}
           />
         </div>
         <div className="payment-terms flex flex-col">
@@ -277,6 +435,8 @@ function InvoiceInfo() {
             name="paymentterms"
             id="paymentterms"
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            value={invoiceInfoData.paymentTerms}
+            onChange={(e) => handleInputChange(e, "paymentTerms")}
           />
         </div>
         <div className="project-description flex flex-col">
@@ -291,6 +451,8 @@ function InvoiceInfo() {
             name="projectdescription"
             id="projectdescription"
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            value={invoiceInfoData.projectDescription}
+            onChange={(e) => handleInputChange(e, "projectDescription")}
           />
         </div>
       </form>
@@ -298,7 +460,12 @@ function InvoiceInfo() {
   )
 }
 
-function ItemNameForm() {
+type itemNameFormProps = {
+  id: number
+  removeItem: any
+}
+
+const ItemNameForm: React.FC<itemNameFormProps> = ({ id, removeItem }) => {
   return (
     <form className="grid items-center gap-5   grid-cols-2  md:grid-cols-5 ">
       <div className="item-name flex flex-col col-span-4 md:col-span-1">
@@ -346,11 +513,14 @@ function ItemNameForm() {
         <label htmlFor="total" className="text-medium-gray font-bold text-sm">
           Total
         </label>
-        <p className="font-bold text-medium-gray">200.00</p>
+        <p className="font-bold text-medium-gray">€ 0.00</p>
       </div>
-      <div className="delete ml-auto md:ml-0 mt-6">
+      <button
+        className="delete ml-auto md:ml-0 mt-6"
+        onClick={() => removeItem(id)}
+      >
         <img src={deleteicon} alt="delete" className="w-4 " />
-      </div>
+      </button>
     </form>
   )
 }

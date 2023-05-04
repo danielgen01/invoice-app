@@ -2,6 +2,7 @@ import React, { useEffect } from "react"
 import arrowRight from "../../../public/assets/icon-arrow-right.svg"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { Link } from "react-router-dom"
+import { BsCircleFill } from "react-icons/bs"
 import {
   setActiveInvoice,
   resetActiveInvoice,
@@ -39,7 +40,7 @@ const InvoiceRow: React.FC<props> = ({
       batchColor = "black dark:white"
       break
     default:
-      batchColor = "gray-500/20"
+      batchColor = "gray-500/90"
   }
 
   const activeInvoice = useAppSelector(
@@ -89,9 +90,7 @@ const InvoiceRow: React.FC<props> = ({
               className="status flex items-center
              bg-green-500/10 w-28 justify-center py-4 rounded-xl gap-2"
             >
-              <div
-                className={`status-batch w-3 h-3 bg-${batchColor} rounded-full`}
-              ></div>
+              <BsCircleFill className={`text-sm text-${batchColor}`}/>
               <h1 className={`text-${batchColor} font-bold capitalize`}>{status}</h1>
             </div>
             <img src={arrowRight} alt="" className="hidden xl:block w-4 " />
