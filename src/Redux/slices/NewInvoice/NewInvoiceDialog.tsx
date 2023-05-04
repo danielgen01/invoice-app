@@ -25,7 +25,7 @@ const NewInvoiceDialog = () => {
 
   const [itemForms, setItemForms] = useState<any>([
     {
-      id: "",
+      id: "", 
       name: "",
       quantity: 0,
       price: 0,

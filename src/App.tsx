@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import  { useState, useEffect } from "react"
 import Navbar from "./components/Navbar/Navbar"
 import Main from "./components/Main/Invoices/Main"
 import "./index.css"
@@ -6,7 +6,6 @@ import Sidebar from "./components/Main/Invoices/Sidebar/Sidebar"
 import DeleteDialog from "./Redux/slices/DeleteDialog/DeleteDialog"
 import NewInvoiceDialog from "./Redux/slices/NewInvoice/NewInvoiceDialog"
 import EditInvoiceDialog from "./Redux/slices/EditInvoice/EditInvoice"
-import ViewInvoice from "./Redux/slices/ViewInvoice/ViewInvoice"
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import ViewInvoicePage from "./components/pages/InvoicePage"
 
