@@ -584,7 +584,9 @@ const ItemNameForm: React.FC<itemNameFormProps> = ({
         <label htmlFor="total" className="text-medium-gray font-bold text-sm">
           Total
         </label>
-        <p className="font-bold text-medium-gray">€ {itemData.quantity * itemData.price}</p>
+        <p className="font-bold text-medium-gray">
+          € {itemData.quantity * itemData.price}
+        </p>
       </div>
       <button
         className="delete ml-auto md:ml-0 mt-6"
