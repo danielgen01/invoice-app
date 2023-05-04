@@ -1,15 +1,27 @@
 import React from "react"
 import arrowleft from "../../../../public/assets/icon-arrow-left.svg"
 import { BsCircleFill } from "react-icons/bs"
+import { RootState } from "../../rootReducer"
+import { useAppSelector, useAppDispatch } from "../../store"
+import { useNavigate } from "react-router-dom"
 
-const ViewInvoice = () => {
+type props = {
+  invoiceId: any
+}
+const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
+  const navigate = useNavigate()
+
+  const handleGoBack = () => {
+    navigate("/")
+  }
+
   return (
     <>
       <div className="overlay"> </div>
       <body className="content px-5 py-5 xl:px-72 lg:py-10">
         <button
           className="go-back-button flex items-center gap-5 "
-          //   onClick={handleToggleNewInvoiceForm}
+          onClick={handleGoBack}
         >
           <img src={arrowleft} alt="goback" className="w-2" />
           <h1 className="font-bold dark:text-white">Go back</h1>

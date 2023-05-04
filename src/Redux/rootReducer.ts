@@ -5,7 +5,7 @@ import newInvoiceSlice from "../Redux/slices/NewInvoice/NewInvoiceSlice"
 
 const rootReducer = combineReducers({
 data:dataSlice,
-newInvoice:newInvoiceSlice
+newInvoice:newInvoiceSlice,
 })
 
 export type RootState = ReturnType<typeof rootReducer>

@@ -7,6 +7,8 @@ import DeleteDialog from "./Redux/slices/DeleteDialog/DeleteDialog"
 import NewInvoiceDialog from "./Redux/slices/NewInvoice/NewInvoiceDialog"
 import EditInvoiceDialog from "./Redux/slices/EditInvoice/EditInvoice"
 import ViewInvoice from "./Redux/slices/ViewInvoice/ViewInvoice"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
+import ViewInvoicePage from "./components/pages/InvoicePage"
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(
@@ -28,19 +30,45 @@ function App() {
   }
 
   return (
-    <div className="APP bg-[#F8F8FB] dark:bg-[#141625] min-h-screen min-w-screen">
-      <div className="navbar xl:hidden">
-        <Navbar toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
+    <Router>
+      <div className="APP bg-[#F8F8FB] dark:bg-[#141625] min-h-screen min-w-screen">
+        <Routes>
+          <Route
+            path="/invoice/:invoiceId"
+            element={
+              <div>
+                <ViewInvoicePage />
+              </div>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <div>
+                <div className="navbar xl:hidden">
+                  <Navbar
+                    toggleDarkMode={toggleDarkMode}
+                    isDarkMode={isDarkMode}
+                  />
+                </div>
+                <div className="sidebar hidden xl:block">
+                  <Sidebar
+                    toggleDarkMode={toggleDarkMode}
+                    isDarkMode={isDarkMode}
+                  />
+                </div>
+                <Main />
+                <NewInvoiceDialog />
+                {/* <DeleteDialog /> */}
+
+                {/* <EditInvoiceDialog /> */}
+                {/* <ViewInvoice /> */}
+              </div>
+            }
+          />
+        </Routes>
       </div>
-      <div className="sidebar hidden xl:block">
-        <Sidebar toggleDarkMode={toggleDarkMode} isDarkMode={isDarkMode} />
-      </div>
-      {/* <Main /> */}
-      {/* <DeleteDialog /> */}
-      <NewInvoiceDialog />
-      {/* <EditInvoiceDialog /> */}
-      <ViewInvoice />
-    </div>
+    </Router>
   )
 }
 
