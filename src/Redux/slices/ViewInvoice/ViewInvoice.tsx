@@ -254,7 +254,7 @@ function Item() {
             </div>
             <div className="price hidden md:block ">
               <h1 className="font-bold text-medium-gray text-lg ">
-                € {item.price.toFixed(2)}
+                € {item.price}
               </h1>
             </div>
             <div className="flex justify-end total">

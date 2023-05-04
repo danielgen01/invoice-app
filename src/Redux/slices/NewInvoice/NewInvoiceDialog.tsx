@@ -139,7 +139,19 @@ const NewInvoiceDialog = () => {
           <h1 className="font-bold text-medium-gray text-xl ">Item List</h1>
 
           {itemForms.map((item: any) => (
-            <ItemNameForm key={item.id} id={item.id} removeItem={removeItem} />
+            <ItemNameForm
+              key={item.id}
+              id={item.id}
+              removeItem={removeItem}
+              itemData={item}
+              setItemData={(updatedItemData: any) =>
+                setItemForms(
+                  itemForms.map((itemForm: any) =>
+                    itemForm.id === item.id ? updatedItemData : itemForm
+                  )
+                )
+              }
+            />
           ))}
           <button
             className="flex items-center justify-center gap-2 bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]"
@@ -157,8 +169,10 @@ const NewInvoiceDialog = () => {
             <button className="text-[#9277FF] font-bold bg-[#DFE3FA] w-20 py-3 rounded-full dark:text-white dark:bg-[#252945]">
               Discard
             </button>
-            <button className="text-medium-gray font-bold bg-[#252945] w-28 h-14
-             rounded-full dark:bg-[#888EB0] dark:text-white">
+            <button
+              className="text-medium-gray font-bold bg-[#252945] w-28 h-14
+             rounded-full dark:bg-[#888EB0] dark:text-white"
+            >
               Save as Draft
             </button>
             <button
@@ -441,43 +455,40 @@ const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
             Payment Terms
           </label>
           <Listbox
-  value={invoiceInfoData.paymentTerms}
-  onChange={(value) =>
-    setInvoiceInfoData({ ...invoiceInfoData, paymentTerms: value })
-  }
->
-  <Listbox.Button
-    className="dark:bg-[#1E2139] font-bold h-12 xl:h-10 rounded-md border-medium-gray/50
+            value={invoiceInfoData.paymentTerms}
+            onChange={(value) =>
+              setInvoiceInfoData({ ...invoiceInfoData, paymentTerms: value })
+            }
+          >
+            <Listbox.Button
+              className="dark:bg-[#1E2139] font-bold h-12 xl:h-10 rounded-md border-medium-gray/50
    border-2 px-4 outline-none flex items-center justify-between "
-  >
-    {
-      paymentTermOptions.find(
-        (option) => option.value === invoiceInfoData.paymentTerms
-      )?.label || "Wählen Sie eine Option"
-    }
-    <img src={arrowDown} />
-  </Listbox.Button>
-  <Listbox.Options
-    className="absolute w-auto 
+            >
+              {paymentTermOptions.find(
+                (option) => option.value === invoiceInfoData.paymentTerms
+              )?.label || "Choose an option"}
+              <img src={arrowDown} />
+            </Listbox.Button>
+            <Listbox.Options
+              className="absolute w-auto 
   mt-20 bg-white dark:bg-[#1E2139]
    rounded-md shadow-lg max-h-60 overflow-auto float-right"
-  >
-    {paymentTermOptions.map((option, optionIdx) => (
-      <Listbox.Option
-        key={optionIdx}
-        value={option.value}
-        className={({ active }) =>
-          `${active ? "bg-medium-gray/50 dark:bg-opacity-20" : ""}
+            >
+              {paymentTermOptions.map((option, optionIdx) => (
+                <Listbox.Option
+                  key={optionIdx}
+                  value={option.value}
+                  className={({ active }) =>
+                    `${active ? "bg-medium-gray/50 dark:bg-opacity-20" : ""}
      hover:bg-medium-gray/50 dark:hover:bg-opacity-20
-     px-4 py-2 font-bold text-sm hover:text-[#7C5DFA]`
-        }
-      >
-        {option.label}
-      </Listbox.Option>
-    ))}
-  </Listbox.Options>
-</Listbox>
-
+     px-4 py-2 font-bold text-sm hover:text-[#7C5DFA] hover:cursor-pointer`
+                  }
+                >
+                  {option.label}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </Listbox>
         </div>
         <div className="project-description flex flex-col">
           <label
@@ -502,10 +513,24 @@ const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
 
 type itemNameFormProps = {
   id: number
-  removeItem: any
+  removeItem: (id: number) => void
+  itemData: any
+  setItemData: any
 }
 
-const ItemNameForm: React.FC<itemNameFormProps> = ({ id, removeItem }) => {
+const ItemNameForm: React.FC<itemNameFormProps> = ({
+  id,
+  removeItem,
+  itemData,
+  setItemData,
+}) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof typeof itemData
+  ) => {
+    setItemData({ ...itemData, [field]: e.target.value })
+  }
+
   return (
     <form className="grid items-center gap-5   grid-cols-2  md:grid-cols-5 ">
       <div className="item-name flex flex-col col-span-4 md:col-span-1">
@@ -520,6 +545,8 @@ const ItemNameForm: React.FC<itemNameFormProps> = ({ id, removeItem }) => {
           name="item-name"
           id="item-name"
           className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+          value={itemData.name}
+          onChange={(e) => handleInputChange(e, "name")}
         />
       </div>
 
@@ -535,6 +562,8 @@ const ItemNameForm: React.FC<itemNameFormProps> = ({ id, removeItem }) => {
           name="quantity"
           id="quantity"
           className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-20 outline-none dark:bg-[#1E2139]"
+          value={itemData.quantity}
+          onChange={(e) => handleInputChange(e, "quantity")}
         />
       </div>
 
@@ -547,13 +576,15 @@ const ItemNameForm: React.FC<itemNameFormProps> = ({ id, removeItem }) => {
           name="price"
           id="price"
           className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-20 outline-none dark:bg-[#1E2139]"
+          value={itemData.priuce}
+          onChange={(e) => handleInputChange(e, "price")}
         />
       </div>
       <div className="total flex flex-col  gap-5">
         <label htmlFor="total" className="text-medium-gray font-bold text-sm">
           Total
         </label>
-        <p className="font-bold text-medium-gray">€ 0.00</p>
+        <p className="font-bold text-medium-gray">€ {itemData.quantity * itemData.price}</p>
       </div>
       <button
         className="delete ml-auto md:ml-0 mt-6"
