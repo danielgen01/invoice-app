@@ -51,12 +51,8 @@ const InvoiceRow: React.FC<props> = ({
     const invoice = data.find((invoice) => invoice.id === invoiceId)
     if (invoice) {
       dispatch(setActiveInvoice(invoice))
-      
     }
-  
-  }  
- 
-  
+  }
 
   // Reset active invoice
   const handleResetActiveInvoice = () => {
@@ -85,13 +81,17 @@ const InvoiceRow: React.FC<props> = ({
           </section>
           {/* SECOND GRID COL */}
           <section className="second-grid-item flex flex-col items-end gap-10 md:flex-row md:items-center md:justify-end">
-            <p className="text-medium-gray font-bold ">{clientName}</p>
+            <p className="text-medium-gray font-bold  whitespace-nowrap">
+              {clientName}
+            </p>
             <div
               className="status flex items-center
              bg-green-500/10 w-28 justify-center py-4 rounded-xl gap-2"
             >
-              <BsCircleFill className={`text-sm text-${batchColor}`}/>
-              <h1 className={`text-${batchColor} font-bold capitalize`}>{status}</h1>
+              <BsCircleFill className={`text-sm text-${batchColor}`} />
+              <h1 className={`text-${batchColor} font-bold capitalize`}>
+                {status}
+              </h1>
             </div>
             <img src={arrowRight} alt="" className="hidden xl:block w-4 " />
           </section>
