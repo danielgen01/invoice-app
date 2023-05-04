@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { PayloadAction } from "@reduxjs/toolkit"
 import Data from "./data.json"
 
 export type InvoiceType = {
@@ -54,8 +55,7 @@ export const emptyInvoice: InvoiceType = {
   },
   items: [],
   total: 0,
-};
-
+}
 
 const dataSlice = createSlice({
   name: "Data",
@@ -70,6 +70,9 @@ const dataSlice = createSlice({
     resetActiveInvoice: (state) => {
       state.activeInvoice = emptyInvoice
     },
+    createNewInvoice: (state, action: PayloadAction<InvoiceType>) => {
+      state.Data.push(action.payload)
+    },
   },
 })
 
@@ -78,4 +81,8 @@ const dataSlice = createSlice({
 export default dataSlice.reducer
 
 // Export actions for use in components
-export const { setActiveInvoice, resetActiveInvoice } = dataSlice.actions
+export const {
+   setActiveInvoice,
+   resetActiveInvoice,
+   createNewInvoice } =
+  dataSlice.actions
