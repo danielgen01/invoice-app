@@ -49,7 +49,7 @@ const NewInvoiceDialog = () => {
           <h1 className="font-bold text-medium-gray text-xl ">Item List</h1>
 
           <ItemNameForm />
-          <ItemNameForm />
+          {/* <ItemNameForm /> */}
           <button className="flex items-center justify-center gap-2 bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]">
             <img src={iconplus} alt="add" />
             <span className="font-bold text-[#9277FF] dark:text-white">
@@ -58,7 +58,7 @@ const NewInvoiceDialog = () => {
           </button>
         </section>
 
-        <div className="bg-white h-20 dark:bg-[#1E2139] mt-10">
+        <div className="bg-white h-20 dark:bg-[#1E2139] mt-10 md:-mt-5">
           <div className="footer-content-buttons flex items-center  justify-between w-full h-full px-4">
             <button className="text-[#9277FF] font-bold bg-[#DFE3FA] px-5 py-3 rounded-full dark:text-white dark:bg-[#252945]">
               Discard
