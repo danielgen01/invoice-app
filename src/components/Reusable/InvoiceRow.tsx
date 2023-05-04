@@ -39,7 +39,7 @@ const InvoiceRow: React.FC<props> = ({
 
   return (
     <Link to={`/invoice/${invoiceId}`}>
-      <div className="row h-40 bg-white shadow-md rounded-lg dark:bg-[#1E2139]  w-[90%] md:h-20 cursor-pointer hover:animate-pulse">
+      <div className="row h-40  bg-white shadow-md rounded-lg dark:bg-[#1E2139]  w-[300px] md:w-[800px] xl:w-[900px] md:h-20 cursor-pointer hover:animate-pulse">
         <div className="content px-5 py-5 grid grid-cols-2 justify-between w-full md:items-center">
           {/* FIRST GRID COL */}
           <section className="first-grid-item flex flex-col gap-5 md:flex-row md:items-center md:gap-20  xl:gap-28 2xl:gap-32 ">
