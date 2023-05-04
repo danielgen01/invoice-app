@@ -20,7 +20,7 @@ const ViewInvoice = () => {
             <TitleAndAdress />
             <InvoiceInfos />
             <section className="price-overview bg-[#F8F8FB] w-full min-h-[300px] mt-4 rounded-xl">
-              <div className="headline hidden md:grid md:grid-cols-4 px-5 bg-[#252945] ">
+              <div className="headline hidden md:grid md:grid-cols-4 px-5 dark:bg-[#252945] ">
                 <h1 className="font-bold text-medium-gray">Item Name</h1>
                 <h1 className="font-bold text-medium-gray flex justify-center">
                   Qty.
