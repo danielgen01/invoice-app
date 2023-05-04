@@ -3,8 +3,7 @@ import { RootState } from "../../rootReducer"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleDeleteInvoiceForm } from "./DeleteDialogSlice"
 
-const DeleteDialog = () => {
-
+const DeleteDialog: React.FC = () => {
   const dispatch = useAppDispatch()
 
   const isDeleteFormOpen = useAppSelector(
@@ -42,7 +41,8 @@ const DeleteDialog = () => {
             <button
               className="bg-[#F8F8FB] px-6 py-3 rounded-full
               font-bold text-[#9277FF] dark:bg-[#1E2139] dark:text-[#DFE3FA]"
-            onClick={handleToggleDeleteInvoiceForm}>
+              onClick={handleToggleDeleteInvoiceForm}
+            >
               Cancel
             </button>
             <button
