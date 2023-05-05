@@ -25,7 +25,7 @@ const NewInvoiceDialog = () => {
 
   const [itemForms, setItemForms] = useState<any>([
     {
-      id: "", 
+      id: "",
       name: "",
       quantity: 0,
       price: 0,
@@ -69,7 +69,25 @@ const NewInvoiceDialog = () => {
     setItemForms(itemForms.filter((item: any) => item.id !== id))
   }
 
+  const isAnyFieldEmpty = () => {
+    const checkEmptyFields = (obj: object) => {
+      return Object.values(obj).some(
+        (value: any) => value === "" || value === 0
+      )
+    }
+
+    const billFromDataEmpty = checkEmptyFields(billFromData)
+    const billToDataEmpty = checkEmptyFields(billToData)
+    const invoiceInfoDataEmpty = checkEmptyFields(invoiceInfoData)
+
+    return billFromDataEmpty || billToDataEmpty || invoiceInfoDataEmpty
+  }
+
   const handleAddInvoice = () => {
+    if (isAnyFieldEmpty()) {
+      alert("Bitte füllen Sie alle Felder aus.")
+      return
+    }
     const newInvoice: InvoiceType = {
       id: Math.floor(Math.random() * 1_00_00).toString(), // Generieren Sie hier eine eindeutige ID für die Rechnung
       createdAt: invoiceInfoData.date,
@@ -110,7 +128,8 @@ const NewInvoiceDialog = () => {
         style={{ display: isNewInvoiceFormOpen ? "block" : "none" }}
         onClick={handleToggleNewInvoiceForm}
       ></div>
-      <section role="dialog"
+      <section
+        role="dialog"
         className=" New Invoice Modal px-5  py-5  flex flex-col gap-6
          bg-[#F8F8FB]
        dark:bg-[#0C0E16] dark:text-white 
@@ -138,9 +157,10 @@ const NewInvoiceDialog = () => {
           itemForms={itemForms}
         />
 
-        <FooterButtons handleAddInvoice={handleAddInvoice}
-            handleToggleNewInvoiceForm={handleToggleNewInvoiceForm}
-            />
+        <FooterButtons
+          handleAddInvoice={handleAddInvoice}
+          handleToggleNewInvoiceForm={handleToggleNewInvoiceForm}
+        />
       </section>
     </>
   )
