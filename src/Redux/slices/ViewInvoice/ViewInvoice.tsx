@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom"
 import { toggleEditInvoiceForm } from "../EditInvoice/EditInvoiceSlice"
 import { toggleDeleteInvoiceForm } from "../DeleteDialog/DeleteDialogSlice"
 import { resetActiveInvoice } from "../Data/DataSlice"
+import { updateActiveInvoiceStatus } from "../Data/DataSlice"
+import { useEffect } from "react"
 
 type props = {
   invoiceId: any
@@ -47,8 +49,15 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
     dispatch(toggleDeleteInvoiceForm())
   }
 
-  console.log(activeInvoice)
+  const changeStatusToPaid = () => {
+    dispatch(updateActiveInvoiceStatus("paid"))
+  }
 
+  useEffect(() => {
+    console.log(activeInvoice.status)
+  }, [activeInvoice])
+  
+    
   return (
     <>
       <div className="overlay"> </div>
@@ -100,6 +109,7 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
             <button
               className="md:hidden w-32 h-12  bg-[#7C5DFA] rounded-full text-white font-bold
              hover:bg-[#9277FF]"
+            onClick={changeStatusToPaid}
             >
               Mark as Paid
             </button>
@@ -118,6 +128,11 @@ function StatusBox() {
   const activeInvoice = useAppSelector(
     (state: RootState) => state.data.activeInvoice
   )
+
+  const changeStatusToPaid = () => {
+    activeInvoice.status = "Paid"
+    console.log(activeInvoice.status)
+  }
 
   const handleToggleEditInvoiceForm = () => {
     dispatch(toggleEditInvoiceForm())
@@ -169,7 +184,9 @@ function StatusBox() {
         >
           Delete
         </button>
-        <button className="hidden md:block  py-3 bg-[#7C5DFA] rounded-full text-white font-bold hover:bg-[#9277FF]">
+        <button className="hidden md:block  py-3 bg-[#7C5DFA] 
+        rounded-full text-white font-bold hover:bg-[#9277FF]"
+        onClick={changeStatusToPaid}>
           Mark as Paid
         </button>
       </div>
