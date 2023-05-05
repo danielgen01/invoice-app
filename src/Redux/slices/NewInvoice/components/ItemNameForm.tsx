@@ -1,4 +1,4 @@
-import deleteicon from "../../../../public/assets/icon-delete.svg"
+import deleteicon from "../../../../../public/assets/icon-delete.svg"
 
 export type itemNameFormProps = {
   id: number

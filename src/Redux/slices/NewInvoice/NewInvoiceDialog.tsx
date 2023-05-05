@@ -5,12 +5,12 @@ import { useAppSelector, useAppDispatch } from "../../store"
 import { toggleNewInvoiceForm } from "./NewInvoiceSlice"
 import { createNewInvoice } from "../Data/DataSlice"
 import { InvoiceType } from "../Data/DataSlice"
-import BillFromForm from "./BillFromForm"
-import BillToForm from "./BillToForm"
-import InvoiceInfo from "./InvoiceInfoForm"
-import GoBackButton from "./GoBackButton"
-import { FooterButtons } from "./FooterButtons"
-import { ItemList } from "./ItemList"
+import BillFromForm from "./components/BillFromForm"
+import BillToForm from "./components/BillToForm"
+import InvoiceInfo from "./components/InvoiceInfoForm"
+import GoBackButton from "./components/GoBackButton"
+import { FooterButtons } from "./components/FooterButtons"
+import { ItemList } from "./components/ItemList"
 
 const NewInvoiceDialog = () => {
   const dispatch = useAppDispatch()

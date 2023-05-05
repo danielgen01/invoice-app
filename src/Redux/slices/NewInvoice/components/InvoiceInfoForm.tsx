@@ -1,6 +1,6 @@
-import NewInvoiceDialog from "./NewInvoiceDialog"
+import NewInvoiceDialog from "../NewInvoiceDialog"
 import { Listbox } from "@headlessui/react"
-import arrowDown from "../../../../public/assets/icon-arrow-down.svg"
+import arrowDown from "../../../../../public/assets/icon-arrow-down.svg"
 
 export type InvoiceInfoProps = {
   invoiceInfoData: any
