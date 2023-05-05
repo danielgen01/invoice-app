@@ -37,7 +37,8 @@ export function TopMainSection() {
             <img src={arrowdown} alt="arrowdown" className="w-4" />
           </button>
           <button
-            className="bg-[#7C5DFA] px-4 py-2 flex  text-white items-center gap-2 rounded-full font-bold text-xl"
+            className="bg-[#7C5DFA] px-4 py-2 flex  text-white items-center gap-2 rounded-full font-bold text-xl 
+            hover:bg-[#9277FF]"
             onClick={handleToggleNewInvoiceForm}
           >
             <img

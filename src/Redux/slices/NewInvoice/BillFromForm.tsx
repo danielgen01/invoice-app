@@ -30,7 +30,8 @@ const BillFromForm: React.FC<BillFromProps> = ({
           type="text"
           name="street-adress"
           id="street-adress"
-          className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none xl:h-10"
+          className="dark:bg-[#1E2139] font-bold h-12  
+           rounded-md border-medium-gray/50 border-2 px-4 outline-none xl:h-10 focus:border-[#7C5DFA]"
           value={billFromData.street}
           onChange={(e) => handleInputChange(e, "street")}
         />
@@ -46,7 +47,8 @@ const BillFromForm: React.FC<BillFromProps> = ({
               type="text"
               name="city"
               id="city"
-              className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40 outline-none dark:bg-[#1E2139]"
+              className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40 outline-none
+               dark:bg-[#1E2139] focus:border-[#7C5DFA]"
               value={billFromData.city}
               onChange={(e) => handleInputChange(e, "city")}
             />
@@ -63,7 +65,8 @@ const BillFromForm: React.FC<BillFromProps> = ({
               type="text"
               name="postcode"
               id="postcode"
-              className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40 outline-none dark:bg-[#1E2139]"
+              className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2
+               w-40 outline-none dark:bg-[#41445a] focus:border-[#7C5DFA]"
               value={billFromData.postCode}
               onChange={(e) => handleInputChange(e, "postCode")}
             />
@@ -79,7 +82,8 @@ const BillFromForm: React.FC<BillFromProps> = ({
               type="text"
               name="country"
               id="country"
-              className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2  outline-none w-full md:w-auto"
+              className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 
+               outline-none w-full md:w-auto focus:border-[#7C5DFA]"
               value={billFromData.country}
               onChange={(e) => handleInputChange(e, "country")}
             />

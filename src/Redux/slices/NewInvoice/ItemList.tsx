@@ -44,7 +44,7 @@ export const ItemList: React.FC<ItemListProps> = ({
       ))}
       <button
         className="flex items-center justify-center gap-2
-         bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]"
+         bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139] hover:bg-[#DFE3FA]"
         onClick={addItem}
       >
         <img src={iconplus} alt="add" />

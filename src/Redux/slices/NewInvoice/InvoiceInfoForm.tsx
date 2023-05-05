@@ -50,7 +50,8 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
             type="date"
             name="Invoicedate"
             id="Invoicedate"
-            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4
+             outline-none focus:border-[#7C5DFA]"
             value={invoiceInfoData.date}
             onChange={(e) => handleInputChange(e, "date")}
           />
@@ -70,7 +71,7 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
           >
             <Listbox.Button
               className="dark:bg-[#1E2139] font-bold h-12 xl:h-10 rounded-md border-medium-gray/50
-   border-2 px-4 outline-none flex items-center justify-between "
+   border-2 px-4 outline-none flex items-center justify-between focus:border-[#7C5DFA]"
             >
               {paymentTermOptions.find(
                 (option) => option.value === invoiceInfoData.paymentTerms
@@ -109,7 +110,8 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
             type="text"
             name="projectdescription"
             id="projectdescription"
-            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4
+             outline-none focus:border-[#7C5DFA]"
             value={invoiceInfoData.projectDescription}
             onChange={(e) => handleInputChange(e, "projectDescription")}
           />

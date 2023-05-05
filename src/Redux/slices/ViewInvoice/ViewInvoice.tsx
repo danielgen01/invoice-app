@@ -92,12 +92,15 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
               Edit
             </button>
             <button
-              className="md:hidden  w-20 h-12 bg-[#EC5757] rounded-full text-white font-bold"
+              className="md:hidden  w-20 h-12 bg-[#EC5757] rounded-full text-white font-bold hover:bg-[rgb(255,151,151)]"
               onClick={handleToggleDeleteInvoiceForm}
             >
               Delete
             </button>
-            <button className="md:hidden w-32 h-12  bg-[#7C5DFA] rounded-full text-white font-bold">
+            <button
+              className="md:hidden w-32 h-12  bg-[#7C5DFA] rounded-full text-white font-bold
+             hover:bg-[#9277FF]"
+            >
               Mark as Paid
             </button>
           </div>
@@ -123,15 +126,35 @@ function StatusBox() {
   const handleToggleDeleteInvoiceForm = () => {
     dispatch(toggleDeleteInvoiceForm())
   }
+
+  const getStatusClasses = (status: string) => {
+    switch (status) {
+      case "Pending":
+        return { bg: "bg-orange-500", text: "text-orange-900" }
+      case "Paid":
+        return { bg: "bg-green-500", text: "text-green-900" }
+      case "Draft":
+        return { bg: "bg-white", text: "text-black" }
+      default:
+        return { bg: "bg-gray-500", text: "text-gray-900" }
+    }
+  }
+
+  const { bg: statusBgColor, text: statusTextColor } = getStatusClasses(
+    activeInvoice.status
+  )
+
   return (
     <div className="status-box h-24 bg-white dark:bg-[#252945] shadow-md mt-5 rounded-xl">
       <div className="status-box-content px-2 py-7  grid grid-cols-2 md:grid-cols-5 md:gap-2">
-        <h1 className="font-bold text-medium-gray capitalize">{activeInvoice.status}</h1>
-        <div className="status-box flex gap-4 items-center bg-green-500/20 justify-center w-[80%] py-2 rounded-md">
-          <BsCircleFill className="text-green-500 text-sm " />
-          <p className="text-green-500 font-bold text-sm capitalize">
-            {activeInvoice.status}
-          </p>
+        <h1 className="font-bold text-medium-gray capitalize">
+          {activeInvoice.status}
+        </h1>
+        <div
+          className={`status-box flex gap-4 items-center justify-center w-[80%] py-2 rounded-md ${statusBgColor} ${statusTextColor}`}
+        >
+          <BsCircleFill className="text-sm" />
+          <p className="font-bold text-sm capitalize">{activeInvoice.status}</p>
         </div>
 
         <button
@@ -141,12 +164,12 @@ function StatusBox() {
           Edit
         </button>
         <button
-          className="hidden md:block  py-3 bg-[#EC5757] rounded-full text-white font-bold"
+          className="hidden md:block  py-3 bg-[#EC5757] rounded-full text-white font-bold hover:bg-[rgb(255,151,151)]"
           onClick={handleToggleDeleteInvoiceForm}
         >
           Delete
         </button>
-        <button className="hidden md:block  py-3 bg-[#7C5DFA] rounded-full text-white font-bold">
+        <button className="hidden md:block  py-3 bg-[#7C5DFA] rounded-full text-white font-bold hover:bg-[#9277FF]">
           Mark as Paid
         </button>
       </div>

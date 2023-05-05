@@ -32,7 +32,8 @@ export const ItemNameForm: React.FC<itemNameFormProps> = ({
           type="text"
           name="item-name"
           id="item-name"
-          className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+          className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2
+           px-4 outline-none focus:border-[#7C5DFA]"
           value={itemData.name}
           onChange={(e) => handleInputChange(e, "name")}
         />
@@ -49,7 +50,8 @@ export const ItemNameForm: React.FC<itemNameFormProps> = ({
           type="text"
           name="quantity"
           id="quantity"
-          className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-20 outline-none dark:bg-[#1E2139]"
+          className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-20 outline-none
+           dark:bg-[#1E2139] focus:border-[#7C5DFA]"
           value={itemData.quantity}
           onChange={(e) => handleInputChange(e, "quantity")}
         />
@@ -63,7 +65,8 @@ export const ItemNameForm: React.FC<itemNameFormProps> = ({
           type="text"
           name="price"
           id="price"
-          className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-20 outline-none dark:bg-[#1E2139]"
+          className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-20 outline-none 
+          dark:bg-[#1E2139] focus:border-[#7C5DFA]"
           value={itemData.priuce}
           onChange={(e) => handleInputChange(e, "price")}
         />
