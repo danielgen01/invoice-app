@@ -1,6 +1,11 @@
 import React from "react"
 
-export function BillFromForm() {
+type BillFromProps = {
+  activeInvoice: any
+}
+
+export const BillFromForm: React.FC<BillFromProps> = 
+({ activeInvoice }) => {
   return (
     <>
       <h2 className="font-bold text-[#7C5DFA] ">Bill from </h2>
@@ -15,7 +20,10 @@ export function BillFromForm() {
           type="text"
           name="street-adress"
           id="street-adress"
-          className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none xl:h-10"
+          className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 
+          rounded-md border-medium-gray/50 border-2 px-4
+           outline-none "
+           defaultValue={activeInvoice.senderAddress.street}
         />
         <div className="city-and-postcode grid grid-cols-2 md:grid-cols-3 items-center justify-between w-full">
           <div className="city flex flex-col gap-2">
@@ -29,7 +37,10 @@ export function BillFromForm() {
               type="text"
               name="city"
               id="city"
-              className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40 outline-none dark:bg-[#1E2139]"
+              className="font-bold h-12  xl:h-10 rounded-md
+               border-medium-gray/50 border-2 w-40 outline-none
+                dark:bg-[#1E2139] px-2"
+              defaultValue={activeInvoice.senderAddress.city}
             />
           </div>
 
@@ -44,7 +55,9 @@ export function BillFromForm() {
               type="text"
               name="postcode"
               id="postcode"
-              className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40 outline-none dark:bg-[#1E2139]"
+              className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40
+               outline-none dark:bg-[#1E2139] px-2"
+              defaultValue={activeInvoice.senderAddress.postCode}
             />
           </div>
           <div className="country flex flex-col gap-2">
@@ -58,7 +71,8 @@ export function BillFromForm() {
               type="text"
               name="country"
               id="country"
-              className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2  outline-none w-full md:w-auto"
+              className="dark:bg-[#1E2139] font-bold h-12  xl:h-10  px-2 rounded-md border-medium-gray/50 border-2  outline-none w-full md:w-auto"
+              defaultValue={activeInvoice.senderAddress.country}
             />
           </div>
         </div>

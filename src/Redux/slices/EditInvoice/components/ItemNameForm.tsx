@@ -1,7 +1,18 @@
 import React from "react"
 import deleteicon from "../../../../../public/assets/icon-delete.svg"
 
-export function ItemNameForm() {
+type ItemNameProps = {
+  defaultValueName: string
+  defaultValueQuantity: number
+  defaultValuePrice: number
+  defaultValueTotal: number
+}
+export const ItemNameForm: React.FC<ItemNameProps> = ({
+  defaultValueName,
+  defaultValueQuantity,
+  defaultValuePrice,
+  defaultValueTotal,
+}) => {
   return (
     <form className="grid items-center gap-5   grid-cols-2  md:grid-cols-5 ">
       <div className="item-name flex flex-col col-span-4 md:col-span-1">
@@ -16,6 +27,7 @@ export function ItemNameForm() {
           name="item-name"
           id="item-name"
           className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+          defaultValue={defaultValueName}
         />
       </div>
 
@@ -31,6 +43,7 @@ export function ItemNameForm() {
           name="quantity"
           id="quantity"
           className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-20 outline-none dark:bg-[#1E2139]"
+          defaultValue={defaultValueQuantity}
         />
       </div>
 
@@ -43,13 +56,14 @@ export function ItemNameForm() {
           name="price"
           id="price"
           className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-20 outline-none dark:bg-[#1E2139]"
+          defaultValue={defaultValuePrice}
         />
       </div>
       <div className="total flex flex-col  gap-5">
         <label htmlFor="total" className="text-medium-gray font-bold text-sm">
           Total
         </label>
-        <p className="font-bold text-medium-gray">200.00</p>
+        <p className="font-bold text-medium-gray">{defaultValueTotal}</p>
       </div>
       <div className="delete ml-auto md:ml-0 mt-6">
         <img src={deleteicon} alt="delete" className="w-4 " />

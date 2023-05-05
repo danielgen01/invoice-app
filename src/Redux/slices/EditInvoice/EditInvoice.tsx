@@ -8,9 +8,10 @@ import { ItemNameForm } from "./components/ItemNameForm"
 import { InvoiceInfo } from "./components/InvoiceInfo"
 import { BillToForm } from "./components/BillToForm"
 import { BillFromForm } from "./components/BillFromForm"
+import { Listbox } from "@headlessui/react"
+
 
 const EditInvoiceDialog = () => {
-  
   const dispatch = useAppDispatch()
 
   const handleToggleEditInvoiceForm = () => {
@@ -19,6 +20,10 @@ const EditInvoiceDialog = () => {
 
   const isEditInvoiceFormOpen = useAppSelector(
     (state: RootState) => state.editInvoice.isEditInvoiceFormOpen
+  )
+
+  const activeInvoice = useAppSelector(
+    (state: RootState) => state.data.activeInvoice
   )
 
   return (
@@ -47,14 +52,24 @@ const EditInvoiceDialog = () => {
           Edit #....
         </h1>
 
-        <BillFromForm />
-        <BillToForm />
-        <InvoiceInfo />
+        <BillFromForm activeInvoice={activeInvoice} />
+        <BillToForm activeInvoice={activeInvoice} />
+        <InvoiceInfo activeInvoice={activeInvoice} />
+
         <section className="flex flex-col gap-2 Itemlist overflow-y-scroll h-60">
           <h1 className="font-bold text-medium-gray text-xl ">Item List</h1>
-
-          <ItemNameForm />
-          <ItemNameForm />
+          {activeInvoice.items.map((item, index) => (
+            <>
+              <ItemNameForm 
+              defaultValueName={item.name}
+              defaultValueQuantity={item.quantity}
+              defaultValuePrice={item.price}
+              defaultValueTotal={item.total}
+              
+              
+              />
+            </>
+          ))}
           <button className="flex items-center justify-center gap-2 bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]">
             <img src={iconplus} alt="add" />
             <span className="font-bold text-[#9277FF] dark:text-white">
