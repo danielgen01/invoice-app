@@ -23,7 +23,7 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
             name="clientsName"
             id="clientsName"
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md
-             border-medium-gray/50 border-2 px-4 outline-none"
+             border-medium-gray/50 border-2 px-4 outline-none focus:border-[#7C5DFA]"
              defaultValue={activeInvoice.clientName}
 
           />
@@ -39,7 +39,8 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
             type="text"
             name="clientsEmail"
             id="clientsEmail"
-            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md 
+            border-medium-gray/50 border-2 px-4 outline-none focus:border-[#7C5DFA]"
             defaultValue={activeInvoice.clientEmail}
 
           />
@@ -55,7 +56,8 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
             type="text"
             name="street-adress"
             id="street-adress"
-            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md
+             border-medium-gray/50 border-2 px-4 outline-none focus:border-[#7C5DFA]"
             defaultValue={activeInvoice.clientAddress.street}
 
           />
@@ -74,7 +76,8 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
               name="city"
               id="city"
               className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50
-               border-2 w-40 outline-none dark:bg-[#1E2139] px-2"
+               border-2 w-40 outline-none dark:bg-[#1E2139] px-2
+               focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.clientAddress.city}
 
             />
@@ -93,7 +96,7 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
               id="postcode"
               className="font-bold h-12  xl:h-10 rounded-md
                border-medium-gray/50 border-2 w-40 outline-none 
-               dark:bg-[#1E2139] px-2"
+               dark:bg-[#1E2139] px-2 focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.clientAddress.postCode}
 
             />
@@ -111,7 +114,7 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
               id="country"
               className="dark:bg-[#1E2139] font-bold h-12 
                xl:h-10 rounded-md border-medium-gray/50 border-2
-                outline-none px-2"
+                outline-none px-2 focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.clientAddress.country}
 
             />

@@ -40,7 +40,9 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({ activeInvoice }) => {
             type="date"
             name="Invoicedate"
             id="Invoicedate"
-            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            className="dark:bg-[#1E2139] font-bold h-12
+              xl:h-10 rounded-md border-medium-gray/50 border-2
+               px-4 outline-none focus:border-[#7C5DFA]"
             defaultValue={activeInvoice.createdAt}
           />
         </div>
@@ -98,7 +100,8 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({ activeInvoice }) => {
             type="text"
             name="projectdescription"
             id="projectdescription"
-            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 outline-none"
+            className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 
+            outline-none focus:border-[#7C5DFA]"
             defaultValue={activeInvoice.description}
           />
         </div>

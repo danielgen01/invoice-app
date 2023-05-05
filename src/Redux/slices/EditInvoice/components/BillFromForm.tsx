@@ -22,7 +22,7 @@ export const BillFromForm: React.FC<BillFromProps> =
           id="street-adress"
           className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 
           rounded-md border-medium-gray/50 border-2 px-4
-           outline-none "
+           outline-none focus:border-[#7C5DFA]"
            defaultValue={activeInvoice.senderAddress.street}
         />
         <div className="city-and-postcode grid grid-cols-2 md:grid-cols-3 items-center justify-between w-full">
@@ -39,7 +39,7 @@ export const BillFromForm: React.FC<BillFromProps> =
               id="city"
               className="font-bold h-12  xl:h-10 rounded-md
                border-medium-gray/50 border-2 w-40 outline-none
-                dark:bg-[#1E2139] px-2"
+                dark:bg-[#1E2139] px-2 focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.senderAddress.city}
             />
           </div>
@@ -56,7 +56,7 @@ export const BillFromForm: React.FC<BillFromProps> =
               name="postcode"
               id="postcode"
               className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40
-               outline-none dark:bg-[#1E2139] px-2"
+               outline-none dark:bg-[#1E2139] px-2 focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.senderAddress.postCode}
             />
           </div>
@@ -71,7 +71,8 @@ export const BillFromForm: React.FC<BillFromProps> =
               type="text"
               name="country"
               id="country"
-              className="dark:bg-[#1E2139] font-bold h-12  xl:h-10  px-2 rounded-md border-medium-gray/50 border-2  outline-none w-full md:w-auto"
+              className="dark:bg-[#1E2139] font-bold h-12  xl:h-10  px-2 rounded-md border-medium-gray/50 border-2
+                outline-none w-full md:w-auto focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.senderAddress.country}
             />
           </div>
