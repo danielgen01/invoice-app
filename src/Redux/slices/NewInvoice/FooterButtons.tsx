@@ -24,7 +24,7 @@ export const FooterButtons: React.FC<ButtonsProps> = ({
           Save as Draft
         </button>
         <button
-          className="text-white font-bold bg-[#7C5DFA] w-28 h-14 rounded-full"
+          className="text-white font-bold bg-[#7C5DFA] w-28 h-14 rounded-full hover:bg-[#9277FF]"
           onClick={handleAddInvoice}
         >
           Save & Send
