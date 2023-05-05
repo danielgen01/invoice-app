@@ -2,16 +2,29 @@ import React from "react"
 import { RootState } from "../../rootReducer"
 import { useAppDispatch, useAppSelector } from "../../store"
 import { toggleDeleteInvoiceForm } from "./DeleteDialogSlice"
+import { deleteInvoice } from "../Data/DataSlice"
+import { useNavigate } from "react-router-dom"
 
 const DeleteDialog: React.FC = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
 
   const isDeleteFormOpen = useAppSelector(
     (state: RootState) => state.deleteInvoice.isDeleteInvoiceFormOpen
   )
 
+  const activeInvoice = useAppSelector(
+    (state: RootState) => state.data.activeInvoice
+  )
+
   const handleToggleDeleteInvoiceForm = () => {
     dispatch(toggleDeleteInvoiceForm())
+  }
+
+  const handleDeleteInvoiceClick = () => {
+    dispatch(deleteInvoice(activeInvoice.id))
+    handleToggleDeleteInvoiceForm()
+    navigate("/") 
   }
 
   return (
@@ -48,6 +61,7 @@ const DeleteDialog: React.FC = () => {
             <button
               className="bg-[#EC5757] px-6 py-3 rounded-full
                font-bold text-white"
+              onClick={handleDeleteInvoiceClick}
             >
               Delete
             </button>

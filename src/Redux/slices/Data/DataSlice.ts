@@ -73,6 +73,10 @@ const dataSlice = createSlice({
     createNewInvoice: (state, action: PayloadAction<InvoiceType>) => {
       state.Data.push(action.payload)
     },
+    deleteInvoice: (state, action: PayloadAction<string>) => {
+      state.Data = state.Data.filter((invoice) => invoice.id !== action.payload)
+    },
+    
   },
 })
 
@@ -81,5 +85,9 @@ const dataSlice = createSlice({
 export default dataSlice.reducer
 
 // Export actions for use in components
-export const { setActiveInvoice, resetActiveInvoice, createNewInvoice } =
-  dataSlice.actions
+export const {
+  setActiveInvoice,
+  resetActiveInvoice,
+  createNewInvoice,
+  deleteInvoice,
+} = dataSlice.actions

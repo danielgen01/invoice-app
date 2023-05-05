@@ -300,6 +300,8 @@ function TotalBox() {
     ? activeInvoice.items.reduce((sum, item) => sum + item.total, 0)
     : 0
 
+    console.log(grandTotal )
+
   return (
     <section className="total-box min-h-[80px] bg-[#1E2139] rounded-b-xl dark:bg-black">
       <div className="total-content py-10 px-10 grid grid-cols-2 text-white ">
