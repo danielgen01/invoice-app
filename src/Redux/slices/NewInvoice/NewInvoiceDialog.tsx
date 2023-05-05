@@ -88,10 +88,15 @@ const NewInvoiceDialog = () => {
       alert("Please fill in all fields.")
       return
     }
+
+    const invoiceDate = new Date(invoiceInfoData.date)
+    const paymentDueDate = new Date(invoiceDate)
+    paymentDueDate.setDate(invoiceDate.getDate() + invoiceInfoData.paymentTerms)
+
     const newInvoice: InvoiceType = {
       id: Math.floor(Math.random() * 1_00_00).toString(), // Generieren Sie hier eine eindeutige ID für die Rechnung
       createdAt: invoiceInfoData.date,
-      paymentDue: invoiceInfoData.date + invoiceInfoData.paymentTerms,
+      paymentDue: paymentDueDate.toISOString().split("T")[0],
       paymentTerms: invoiceInfoData.paymentTerms,
       clientName: billToData.clientName,
       clientEmail: billToData.clientEmail,
