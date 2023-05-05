@@ -2,12 +2,19 @@ import React from "react"
 
 type ButtonsProps = {
   handleAddInvoice: () => void
+  handleToggleNewInvoiceForm: () => void
 }
-export const FooterButtons: React.FC<ButtonsProps> = ({ handleAddInvoice }) => {
+export const FooterButtons: React.FC<ButtonsProps> = ({
+  handleAddInvoice,
+  handleToggleNewInvoiceForm,
+}) => {
   return (
     <div className="bg-white h-20 dark:bg-[#1E2139] mt-10 md:-mt-5">
       <div className="footer-content-buttons flex items-center  justify-between w-full h-full px-4">
-        <button className="text-[#9277FF] font-bold bg-[#DFE3FA] w-20 py-3 rounded-full dark:text-white dark:bg-[#252945]">
+        <button
+          className="text-[#9277FF] font-bold bg-[#DFE3FA] w-20 py-3 rounded-full dark:text-white dark:bg-[#252945]"
+          onClick={handleToggleNewInvoiceForm}
+        >
           Discard
         </button>
         <button

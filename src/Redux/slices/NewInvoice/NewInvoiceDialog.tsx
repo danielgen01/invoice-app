@@ -110,7 +110,7 @@ const NewInvoiceDialog = () => {
         style={{ display: isNewInvoiceFormOpen ? "block" : "none" }}
         onClick={handleToggleNewInvoiceForm}
       ></div>
-      <dialog
+      <section role="dialog"
         className=" New Invoice Modal px-5  py-5  flex flex-col gap-6
          bg-[#F8F8FB]
        dark:bg-[#0C0E16] dark:text-white 
@@ -138,8 +138,10 @@ const NewInvoiceDialog = () => {
           itemForms={itemForms}
         />
 
-        <FooterButtons handleAddInvoice={handleAddInvoice} />
-      </dialog>
+        <FooterButtons handleAddInvoice={handleAddInvoice}
+            handleToggleNewInvoiceForm={handleToggleNewInvoiceForm}
+            />
+      </section>
     </>
   )
 }
