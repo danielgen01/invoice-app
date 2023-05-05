@@ -4,6 +4,7 @@ import { RootState } from "../../../rootReducer"
 import { useAppSelector, useAppDispatch } from "../../../store"
 import { toggleEditInvoiceForm } from "../../EditInvoice/EditInvoiceSlice"
 import { toggleDeleteInvoiceForm } from "../../DeleteDialog/DeleteDialogSlice"
+import { updateActiveInvoiceStatus } from "../../Data/DataSlice"
 
 export const StatusBox = () => {
   const dispatch = useAppDispatch()
@@ -13,8 +14,7 @@ export const StatusBox = () => {
   )
 
   const changeStatusToPaid = () => {
-    activeInvoice.status = "Paid"
-    console.log(activeInvoice.status)
+    dispatch(updateActiveInvoiceStatus("paid"))
   }
 
   const handleToggleEditInvoiceForm = () => {
