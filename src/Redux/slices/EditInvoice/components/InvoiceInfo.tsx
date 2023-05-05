@@ -1,31 +1,46 @@
 import React from "react"
 import { Listbox } from "@headlessui/react"
 import arrowDown from "../../../../../public/assets/icon-arrow-down.svg"
+import { useState } from "react"
 
 type InvoiceInfoProps = {
   activeInvoice: any
+  invoiceInfoData: any
+  setInvoiceInfoData: any
 }
 
-const paymentTermOptions = [
-  {
-    label: "Next 1 day",
-    value: 1,
-  },
-  {
-    label: "Next 7 days",
-    value: 7,
-  },
-  {
-    label: "Next 14 days",
-    value: 14,
-  },
-  {
-    label: "Next 30 days",
-    value: 30,
-  },
-]
+export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
+  activeInvoice,
+  invoiceInfoData,
+  setInvoiceInfoData,
+}) => {
+  const paymentTermOptions = [
+    {
+      label: "Next 1 day",
+      value: 1,
+    },
+    {
+      label: "Next 7 days",
+      value: 7,
+    },
+    {
+      label: "Next 14 days",
+      value: 14,
+    },
+    {
+      label: "Next 30 days",
+      value: 30,
+    },
+  ]
 
-export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({ activeInvoice }) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof typeof invoiceInfoData
+  ) => {
+    setInvoiceInfoData({ ...invoiceInfoData, [field]: e.target.value })
+    console.log(invoiceInfoData)
+  }
+
   return (
     <>
       <form className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
@@ -44,6 +59,7 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({ activeInvoice }) => {
               xl:h-10 rounded-md border-medium-gray/50 border-2
                px-4 outline-none focus:border-[#7C5DFA]"
             defaultValue={activeInvoice.createdAt}
+            onChange={(e) => handleInputChange(e, "date")}
           />
         </div>
         <div className="payment-terms flex flex-col">
@@ -54,10 +70,10 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({ activeInvoice }) => {
             Payment Terms
           </label>
           <Listbox
-            defaultValue={activeInvoice.paymentTerms}
-            // onChange={(value) =>
-            //   setInvoiceInfoData({ ...invoiceInfoData, paymentTerms: value })
-            // }
+            value={activeInvoice.paymentTerms}
+            onChange={(value) =>
+              setInvoiceInfoData({ ...invoiceInfoData, paymentTerms: value })
+            }
           >
             <Listbox.Button
               className="dark:bg-[#1E2139] font-bold h-12 xl:h-10 rounded-md border-medium-gray/50
@@ -103,6 +119,7 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({ activeInvoice }) => {
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4 
             outline-none focus:border-[#7C5DFA]"
             defaultValue={activeInvoice.description}
+            onChange={(e) => handleInputChange(e, "projectDescription")}
           />
         </div>
       </form>

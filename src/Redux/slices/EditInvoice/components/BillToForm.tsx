@@ -3,9 +3,19 @@ import { emptyInvoice } from "../../Data/DataSlice"
 
 type BillToProps = {
   activeInvoice: any
+  billToData:any 
+  setBillToData:any
 }
 
-export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
+export const BillToForm: React.FC<BillToProps> = ({ activeInvoice,billToData,setBillToData }) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof typeof billToData
+  ) => {
+    setBillToData({ ...billToData, [field]: e.target.value })
+    console.log(billToData)
+  
+}
   return (
     <>
       <h2 className="font-bold text-[#7C5DFA]">Bill To </h2>
@@ -25,6 +35,8 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md
              border-medium-gray/50 border-2 px-4 outline-none focus:border-[#7C5DFA]"
              defaultValue={activeInvoice.clientName}
+             onChange={(e) => handleInputChange(e, "clientName")}
+
 
           />
         </div>
@@ -42,6 +54,8 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md 
             border-medium-gray/50 border-2 px-4 outline-none focus:border-[#7C5DFA]"
             defaultValue={activeInvoice.clientEmail}
+            onChange={(e) => handleInputChange(e, "clientEmail")}
+
 
           />
         </div>
@@ -59,6 +73,8 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md
              border-medium-gray/50 border-2 px-4 outline-none focus:border-[#7C5DFA]"
             defaultValue={activeInvoice.clientAddress.street}
+            onChange={(e) => handleInputChange(e, "street")}
+
 
           />
         </div>
@@ -79,6 +95,8 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
                border-2 w-40 outline-none dark:bg-[#1E2139] px-2
                focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.clientAddress.city}
+              onChange={(e) => handleInputChange(e, "city")}
+
 
             />
           </div>
@@ -98,6 +116,8 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
                border-medium-gray/50 border-2 w-40 outline-none 
                dark:bg-[#1E2139] px-2 focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.clientAddress.postCode}
+              onChange={(e) => handleInputChange(e, "postCode")}
+
 
             />
           </div>
@@ -116,6 +136,8 @@ export const BillToForm: React.FC<BillToProps> = ({ activeInvoice }) => {
                xl:h-10 rounded-md border-medium-gray/50 border-2
                 outline-none px-2 focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.clientAddress.country}
+              onChange={(e) => handleInputChange(e, "country")}
+
 
             />
           </div>

@@ -2,10 +2,23 @@ import React from "react"
 
 type BillFromProps = {
   activeInvoice: any
+  billFromData: any
+  setBillFromData: any
 }
 
-export const BillFromForm: React.FC<BillFromProps> = 
-({ activeInvoice }) => {
+export const BillFromForm: React.FC<BillFromProps> = ({
+  activeInvoice,
+  billFromData,
+  setBillFromData,
+}) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof typeof billFromData
+  ) => {
+    setBillFromData({ ...billFromData, [field]: e.target.value })
+    console.log(billFromData)
+  }
+
   return (
     <>
       <h2 className="font-bold text-[#7C5DFA] ">Bill from </h2>
@@ -23,7 +36,8 @@ export const BillFromForm: React.FC<BillFromProps> =
           className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 
           rounded-md border-medium-gray/50 border-2 px-4
            outline-none focus:border-[#7C5DFA]"
-           defaultValue={activeInvoice.senderAddress.street}
+          defaultValue={activeInvoice.senderAddress.street}
+          onChange={(e) => handleInputChange(e, "street")}
         />
         <div className="city-and-postcode grid grid-cols-2 md:grid-cols-3 items-center justify-between w-full">
           <div className="city flex flex-col gap-2">
@@ -41,6 +55,7 @@ export const BillFromForm: React.FC<BillFromProps> =
                border-medium-gray/50 border-2 w-40 outline-none
                 dark:bg-[#1E2139] px-2 focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.senderAddress.city}
+              onChange={(e) => handleInputChange(e, "city")}
             />
           </div>
 
@@ -58,6 +73,7 @@ export const BillFromForm: React.FC<BillFromProps> =
               className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40
                outline-none dark:bg-[#1E2139] px-2 focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.senderAddress.postCode}
+              onChange={(e) => handleInputChange(e, "postCode")}
             />
           </div>
           <div className="country flex flex-col gap-2">
@@ -74,6 +90,7 @@ export const BillFromForm: React.FC<BillFromProps> =
               className="dark:bg-[#1E2139] font-bold h-12  xl:h-10  px-2 rounded-md border-medium-gray/50 border-2
                 outline-none w-full md:w-auto focus:border-[#7C5DFA]"
               defaultValue={activeInvoice.senderAddress.country}
+              onChange={(e) => handleInputChange(e, "country")}
             />
           </div>
         </div>
