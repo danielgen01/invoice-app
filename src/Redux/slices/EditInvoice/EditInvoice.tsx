@@ -155,8 +155,9 @@ const EditInvoiceDialog = () => {
           <img src={arrowleft} alt="goback" className="w-2" />
           <h1 className="font-bold">Go back</h1>
         </button>
+        
         <h1 className="mt-5 font-bold text-2xl New-invoice-headline">
-          Edit #....
+          Edit #{activeInvoice.id}
         </h1>
 
         <BillFromForm
