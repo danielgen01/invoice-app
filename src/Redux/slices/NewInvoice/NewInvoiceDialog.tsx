@@ -85,7 +85,7 @@ const NewInvoiceDialog = () => {
 
   const handleAddInvoice = () => {
     if (isAnyFieldEmpty()) {
-      alert("Bitte füllen Sie alle Felder aus.")
+      alert("Please fill in all fields.")
       return
     }
     const newInvoice: InvoiceType = {
