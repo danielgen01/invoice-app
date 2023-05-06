@@ -21,6 +21,8 @@ export const ItemNameForm: React.FC<ItemNameProps> = ({
 }) => {
   const priceRef = useRef<HTMLInputElement | null>(null)
   const quantityRef = useRef<HTMLInputElement | null>(null)
+  const nameRef = useRef<HTMLInputElement | null>(null)
+
   const [total, setTotal] = useState(0)
 
   function calculateTotal() {
@@ -36,7 +38,7 @@ export const ItemNameForm: React.FC<ItemNameProps> = ({
   function handleItemChange() {
     const updatedItem = {
       id,
-      name: document.querySelector<HTMLInputElement>("#item-name")?.value || "",
+      name: nameRef.current?.value || "",
       quantity: parseFloat(quantityRef.current?.value || "0"),
       price: parseFloat(priceRef.current?.value || "0"),
       total: total,
@@ -60,6 +62,7 @@ export const ItemNameForm: React.FC<ItemNameProps> = ({
           className="dark:bg-[#1E2139] font-bold h-12  xl:h-10
            rounded-md border-medium-gray/50 border-2 px-4 
            outline-none focus:border-[#7C5DFA]"
+          ref={nameRef}
           defaultValue={defaultValueName}
           onChange={handleItemChange}
         />
