@@ -30,15 +30,7 @@ const EditInvoiceDialog = () => {
 
   // States
 
-  const [itemForms, setItemForms] = useState<any>([
-    {
-      id: "",
-      name: "",
-      quantity: 0,
-      price: 0,
-      total: 0,
-    },
-  ])
+  const [itemForms, setItemForms] = useState<any>(activeInvoice.items)
 
   const [billFromData, setBillFromData] = useState({
     street: activeInvoice.senderAddress.street,
@@ -67,12 +59,18 @@ const EditInvoiceDialog = () => {
   }
 
   const addItem = () => {
-    setItemForms([...itemForms, { id: new Date().getTime() }])
+    setItemForms([...itemForms, { id: Math.floor(Math.random() * 1_000_000) }
+    ])
   }
 
   const removeItem = (id: number) => {
     setItemForms(itemForms.filter((item: any) => item.id !== id))
   }
+
+  const updateItem = (id: number, updatedItem: any) => {
+    setItemForms(itemForms.map((item: any) => (item.id === id ? updatedItem : item)))
+  }
+  
 
   const isAnyFieldEmpty = () => {
     const checkEmptyFields = (obj: object) => {
@@ -98,10 +96,18 @@ const EditInvoiceDialog = () => {
     const paymentDueDate = new Date(invoiceDate)
     paymentDueDate.setDate(invoiceDate.getDate() + invoiceInfoData.paymentTerms)
 
+    const updatedItems = itemForms.map((item: any) => {
+      const price = parseFloat(item.price) || 0
+      const quantity = parseFloat(item.quantity) || 0
+      const total = price * quantity
+      const name = item.name
+      return { ...item, total, name, quantity }
+    })
+
     const newInvoice: any = {
-      id: Math.floor(Math.random() * 1_00_00).toString(), // Generieren Sie hier eine eindeutige ID für die Rechnung
+      id: Math.floor(Math.random() * 1_00_00).toString(),
       createdAt: invoiceInfoData.date,
-      // paymentDue: paymentDueDate.toISOString().split("T")[0],
+      paymentDue: paymentDueDate.toISOString().split("T")[0],
       paymentTerms: invoiceInfoData.paymentTerms,
       clientName: billToData.clientName,
       clientEmail: billToData.clientEmail,
@@ -119,8 +125,8 @@ const EditInvoiceDialog = () => {
         postCode: billToData.postCode,
         country: billToData.country,
       },
-      items: itemForms,
-      total: itemForms.reduce(
+      items: updatedItems,
+      total: updatedItems.reduce(
         (acc: any, item: { total: any }) => acc + item.total,
         0
       ),
@@ -130,7 +136,7 @@ const EditInvoiceDialog = () => {
     dispatch(resetActiveInvoice())
     dispatch(setActiveInvoice(newInvoice))
     handleToggleEditInvoiceForm()
-    console.log(newInvoice)
+    console.log(itemForms)
   }
 
   return (
@@ -155,7 +161,7 @@ const EditInvoiceDialog = () => {
           <img src={arrowleft} alt="goback" className="w-2" />
           <h1 className="font-bold">Go back</h1>
         </button>
-        
+
         <h1 className="mt-5 font-bold text-2xl New-invoice-headline">
           Edit #{activeInvoice.id}
         </h1>
@@ -178,17 +184,25 @@ const EditInvoiceDialog = () => {
 
         <section className="flex flex-col gap-2 Itemlist overflow-y-scroll h-60">
           <h1 className="font-bold text-medium-gray text-xl ">Item List</h1>
-          {activeInvoice.items.map((item, index) => (
+          {itemForms.map((item: any, index: number) => (
             <>
               <ItemNameForm
+                id={item.id}
                 defaultValueName={item.name}
                 defaultValueQuantity={item.quantity}
                 defaultValuePrice={item.price}
                 defaultValueTotal={item.total}
+                removeItem={removeItem}
+                updateItem={updateItem}
+
               />
             </>
           ))}
-          <button className="flex items-center justify-center gap-2 bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]">
+          <button
+            className="flex items-center justify-center gap-2 
+          bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]"
+            onClick={addItem}
+          >
             <img src={iconplus} alt="add" />
             <span className="font-bold text-[#9277FF] dark:text-white">
               Add new Item

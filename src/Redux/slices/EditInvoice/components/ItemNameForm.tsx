@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef, useState, useEffect } from "react"
 import deleteicon from "../../../../../public/assets/icon-delete.svg"
 
 type ItemNameProps = {
@@ -6,13 +6,44 @@ type ItemNameProps = {
   defaultValueQuantity: number
   defaultValuePrice: number
   defaultValueTotal: number
+  removeItem: any
+  id: any
+  updateItem: any
 }
 export const ItemNameForm: React.FC<ItemNameProps> = ({
   defaultValueName,
   defaultValueQuantity,
   defaultValuePrice,
   defaultValueTotal,
+  removeItem,
+  id,
+  updateItem,
 }) => {
+  const priceRef = useRef<HTMLInputElement | null>(null)
+  const quantityRef = useRef<HTMLInputElement | null>(null)
+  const [total, setTotal] = useState(0)
+
+  function calculateTotal() {
+    const price = parseFloat(priceRef.current?.value || "0")
+    const quantity = parseFloat(quantityRef.current?.value || "0")
+    setTotal(price * quantity)
+  }
+
+  useEffect(() => {
+    calculateTotal()
+  }, [priceRef.current?.value, quantityRef.current?.value])
+
+  function handleItemChange() {
+    const updatedItem = {
+      id,
+      name: document.querySelector<HTMLInputElement>("#item-name")?.value || "",
+      quantity: parseFloat(quantityRef.current?.value || "0"),
+      price: parseFloat(priceRef.current?.value || "0"),
+      total: total,
+    }
+    updateItem(id, updatedItem)
+  }
+
   return (
     <form className="grid items-center gap-5   grid-cols-2  md:grid-cols-5 ">
       <div className="item-name flex flex-col col-span-4 md:col-span-1">
@@ -30,6 +61,7 @@ export const ItemNameForm: React.FC<ItemNameProps> = ({
            rounded-md border-medium-gray/50 border-2 px-4 
            outline-none focus:border-[#7C5DFA]"
           defaultValue={defaultValueName}
+          onChange={handleItemChange}
         />
       </div>
 
@@ -48,6 +80,11 @@ export const ItemNameForm: React.FC<ItemNameProps> = ({
            border-medium-gray/50 border-2 w-20 outline-none
             dark:bg-[#1E2139] focus:border-[#7C5DFA]"
           defaultValue={defaultValueQuantity}
+          ref={quantityRef}
+          onChange={() => {
+            calculateTotal()
+            handleItemChange()
+          }}
         />
       </div>
 
@@ -62,17 +99,25 @@ export const ItemNameForm: React.FC<ItemNameProps> = ({
           className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-20 outline-none
            dark:bg-[#1E2139] focus:border-[#7C5DFA]"
           defaultValue={defaultValuePrice}
+          ref={priceRef}
+          onChange={() => {
+            calculateTotal()
+            handleItemChange()
+          }}
         />
       </div>
       <div className="total flex flex-col  gap-5">
         <label htmlFor="total" className="text-medium-gray font-bold text-sm">
           Total
         </label>
-        <p className="font-bold text-medium-gray">{defaultValueTotal}</p>
+        <p className="font-bold text-medium-gray">{total.toFixed(2)}</p>
       </div>
-      <div className="delete ml-auto md:ml-0 mt-6">
+      <button
+        className="delete ml-auto md:ml-0 mt-6"
+        onClick={() => removeItem(id)}
+      >
         <img src={deleteicon} alt="delete" className="w-4 " />
-      </div>
+      </button>
     </form>
   )
 }
