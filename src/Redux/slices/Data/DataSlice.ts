@@ -77,14 +77,16 @@ const dataSlice = createSlice({
     deleteInvoice: (state, action: PayloadAction<string>) => {
       state.Data = state.Data.filter((invoice) => invoice.id !== action.payload)
     },
-    updateActiveInvoice: (state) => {
+    updateActiveInvoice: (state, action: PayloadAction<InvoiceType>) => {
       const index = state.Data.findIndex(
         (invoice) => invoice.id === state.activeInvoice.id
       )
       if (index !== -1) {
-        state.Data[index] = state.activeInvoice
+        state.Data[index] = action.payload
+        state.activeInvoice = action.payload
       }
     },
+    
     updateActiveInvoiceStatus: (state, action: PayloadAction<string>) => {
       const index = state.Data.findIndex(
         (invoice) => invoice.id === state.activeInvoice.id
@@ -103,6 +105,9 @@ const dataSlice = createSlice({
         return checked ? invoice.status === status : true
       })
     },
+    resetFilter: (state) => {
+      state.filteredData = [...state.Data];
+    },
   },
 })
 
@@ -117,5 +122,6 @@ export const {
   deleteInvoice,
   updateActiveInvoiceStatus,
   updateActiveInvoice,
-  filterList
+  filterList,
+  resetFilter
 } = dataSlice.actions

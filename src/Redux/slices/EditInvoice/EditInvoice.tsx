@@ -28,6 +28,10 @@ const EditInvoiceDialog = () => {
     (state: RootState) => state.data.activeInvoice
   )
 
+  const data = useAppSelector(
+    (state: RootState) => state.data.Data
+  )
+
   // States
 
   const [itemForms, setItemForms] = useState<any>(activeInvoice.items)
@@ -136,7 +140,7 @@ const EditInvoiceDialog = () => {
     dispatch(resetActiveInvoice())
     dispatch(setActiveInvoice(newInvoice))
     handleToggleEditInvoiceForm()
-    console.log(itemForms)
+    console.log(data)
   }
 
   return (
