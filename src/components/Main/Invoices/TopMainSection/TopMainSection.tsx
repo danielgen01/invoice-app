@@ -1,18 +1,25 @@
-import arrowdown from "../../../../../public/assets/icon-arrow-down.svg"
 import plus from "../../../../../public/assets/icon-plus.svg"
 import { useAppSelector, useAppDispatch } from "../../../../Redux/store"
 import { RootState } from "../../../../Redux/rootReducer"
 import { toggleNewInvoiceForm } from "../../../../Redux/slices/NewInvoice/NewInvoiceSlice"
+import { FilterButton } from "./FilterButton"
+import { FilterList } from "./FilterList"
+import { useState } from "react"
 
 export function TopMainSection() {
   const dispatch = useAppDispatch()
   const data = useAppSelector((state: RootState) => state.data.Data)
+  const [isFilterListOpen, setIsFilterListOpen] = useState(false)
   const isNewInvoiceFormOpen = useAppSelector(
     (state: RootState) => state.newInvoice.isNewInvoiceFormOpen
   )
 
   const handleToggleNewInvoiceForm = () => {
     dispatch(toggleNewInvoiceForm())
+  }
+
+  const handleToggleFilterList = () => {
+    setIsFilterListOpen(!isFilterListOpen)
   }
 
   return (
@@ -27,15 +34,14 @@ export function TopMainSection() {
           </p>
         </div>
         <section className="buttons flex items-center gap-4 xl:gap-20">
-          <button className="filter flex items-center justify-between gap-4 md:whitespace-nowrap">
-            <h1 className="font-bold text-lg dark:text-white md:whitespace-nowrap">
-              Filter{" "}
-              <span className="hidden md:block whitespace-nowrap">
-                by status
-              </span>
-            </h1>
-            <img src={arrowdown} alt="arrowdown" className="w-4" />
-          </button>
+          <FilterButton
+            isFilterListOpen={isFilterListOpen}
+            handleToggleFilterList={handleToggleFilterList}
+          />
+          <FilterList
+            isFilterListOpen={isFilterListOpen}
+            handleToggleFilterList={handleToggleFilterList}
+          />
           <button
             className="bg-[#7C5DFA] px-4 py-2 flex  text-white items-center gap-2 rounded-full font-bold text-xl 
             hover:bg-[#9277FF]"
