@@ -17,6 +17,19 @@ type props = {
   status: string
 }
 
+const getBatchColorClass = (status: string) => {
+  switch (status) {
+    case "paid":
+      return "text-green-500"
+    case "pending":
+      return "text-orange-500"
+    case "draft":
+      return "text-black dark:text-white"
+    default:
+      return "text-gray-500/90"
+  }
+}
+
 const InvoiceRow: React.FC<props> = ({
   invoiceId,
   paymentDue,
@@ -27,21 +40,7 @@ const InvoiceRow: React.FC<props> = ({
   const data = useAppSelector((state: RootState) => state.data.Data)
   const dispatch = useAppDispatch()
 
-  let batchColor: string
-
-  switch (status) {
-    case "paid":
-      batchColor = "green-500"
-      break
-    case "pending":
-      batchColor = "orange-500"
-      break
-    case "draft":
-      batchColor = "black dark:white"
-      break
-    default:
-      batchColor = "gray-500/90"
-  }
+  const batchColorClass = getBatchColorClass(status)
 
   const activeInvoice = useAppSelector(
     (state: RootState) => state.data.activeInvoice
@@ -64,10 +63,12 @@ const InvoiceRow: React.FC<props> = ({
       to={`/invoice/${invoiceId}`}
       onClick={() => handleSetActiveInvoice(invoiceId)}
     >
-      <div className="row h-40  bg-white shadow-md rounded-lg
+      <div
+        className="row h-40  bg-white shadow-md rounded-lg
        dark:bg-[#1E2139]  w-[300px] md:w-[800px] xl:w-[900px] 
        md:h-20 cursor-pointer  lg:hover:border-[#7C5DFA]
-        lg:hover:border-2">
+        lg:hover:border-2"
+      >
         <div className="content px-5 py-5 grid grid-cols-2 justify-between w-full md:items-center">
           {/* FIRST GRID COL */}
           <section className="first-grid-item flex flex-col gap-5 md:flex-row md:items-center md:gap-20  xl:gap-28 2xl:gap-32 ">
@@ -88,14 +89,15 @@ const InvoiceRow: React.FC<props> = ({
               {clientName}
             </p>
             <div
-              className="status flex items-center
-             bg-green-500/10 w-28 justify-center py-4 rounded-xl gap-2"
+              className={`status flex items-center
+  bg-green-500/10 w-28 justify-center py-4 rounded-xl gap-2`}
             >
-              <BsCircleFill className={`text-sm text-${batchColor}`} />
-              <h1 className={`text-${batchColor} font-bold capitalize`}>
+              <BsCircleFill className={`text-sm ${batchColorClass}`} />
+              <h1 className={`${batchColorClass} font-bold capitalize`}>
                 {status}
               </h1>
             </div>
+
             <img src={arrowRight} alt="" className="hidden xl:block w-4 " />
           </section>
         </div>
