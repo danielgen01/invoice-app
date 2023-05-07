@@ -125,6 +125,55 @@ const NewInvoiceDialog = () => {
     handleToggleNewInvoiceForm()
   }
 
+  const isValidDate = (date: any) => {
+    return date instanceof Date && !isNaN(date.getTime())
+  }
+
+  // ...
+
+  // save as draft
+  const handleSaveAsDraft = () => {
+    const invoiceDate = new Date(invoiceInfoData.date)
+    const paymentDueDate = new Date(invoiceDate)
+    paymentDueDate.setDate(invoiceDate.getDate() + invoiceInfoData.paymentTerms)
+
+    const newInvoice: Partial<InvoiceType> = {
+      id: Math.floor(Math.random() * 1_00_00).toString(),
+      createdAt: isValidDate(invoiceDate)
+        ? invoiceDate.toISOString().split("T")[0]
+        : new Date().toISOString().split("T")[0],
+      paymentDue: isValidDate(paymentDueDate)
+        ? paymentDueDate.toISOString().split("T")[0]
+        : new Date().toISOString().split("T")[0],
+      paymentTerms: invoiceInfoData.paymentTerms || 0,
+      clientName: billToData.clientName || "",
+      clientEmail: billToData.clientEmail || "",
+      description: invoiceInfoData.projectDescription || "",
+      status: "draft",
+      senderAddress: {
+        street: billFromData.street || "",
+        city: billFromData.city || "",
+        postCode: billFromData.postCode || "",
+        country: billFromData.country || "",
+      },
+      clientAddress: {
+        street: billToData.street || "",
+        city: billToData.city || "",
+        postCode: billToData.postCode || "",
+        country: billToData.country || "",
+      },
+      items: itemForms || [],
+      total:
+        itemForms.reduce(
+          (acc: any, item: { total: any }) => acc + item.total,
+          0
+        ) || 0,
+    }
+
+    dispatch(createNewInvoice(newInvoice as InvoiceType))
+    handleToggleNewInvoiceForm()
+  }
+
   return (
     <>
       <div
@@ -165,6 +214,7 @@ const NewInvoiceDialog = () => {
         <FooterButtons
           handleAddInvoice={handleAddInvoice}
           handleToggleNewInvoiceForm={handleToggleNewInvoiceForm}
+          handleSaveAsDraft={handleSaveAsDraft}
         />
       </section>
     </>

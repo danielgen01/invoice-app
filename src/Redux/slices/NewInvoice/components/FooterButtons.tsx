@@ -3,10 +3,12 @@ import React from "react"
 type ButtonsProps = {
   handleAddInvoice: () => void
   handleToggleNewInvoiceForm: () => void
+  handleSaveAsDraft:any
 }
 export const FooterButtons: React.FC<ButtonsProps> = ({
   handleAddInvoice,
   handleToggleNewInvoiceForm,
+  handleSaveAsDraft
 }) => {
   return (
     <div className="bg-white h-20 dark:bg-[#1E2139] mt-10 md:-mt-5">
@@ -20,6 +22,7 @@ export const FooterButtons: React.FC<ButtonsProps> = ({
         <button
           className="text-medium-gray font-bold bg-[#252945] w-28 h-14
              rounded-full dark:bg-[#888EB0] dark:text-white"
+        onClick={handleSaveAsDraft}
         >
           Save as Draft
         </button>

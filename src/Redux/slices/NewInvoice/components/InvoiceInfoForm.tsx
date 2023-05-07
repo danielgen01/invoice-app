@@ -36,6 +36,9 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
       value: 30,
     },
   ]
+
+  const today = new Date().toISOString().split("T")[0]
+
   return (
     <>
       <form className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-4">
@@ -52,7 +55,7 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
             id="Invoicedate"
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4
              outline-none focus:border-[#7C5DFA]"
-            value={invoiceInfoData.date}
+            value={invoiceInfoData.date || today}
             onChange={(e) => handleInputChange(e, "date")}
           />
         </div>
