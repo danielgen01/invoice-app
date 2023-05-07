@@ -1,3 +1,5 @@
+import CheckBox from "./CheckBox"
+
 type filterListProps = {
   isFilterListOpen: boolean
   handleToggleFilterList: any
@@ -9,7 +11,7 @@ export const FilterList: React.FC<filterListProps> = ({
   return (
     <>
       <div
-        className="absolute top-52 xl:top-40 bg-white shadow-md min-w-[200px] min-h-[150px] rounded-lg"
+        className="absolute top-52 xl:top-40 bg-white dark:bg-[#1E2139] shadow-md min-w-[200px] min-h-[150px] rounded-lg"
         style={{ display: isFilterListOpen ? "block" : "none" }}
       >
         <div
@@ -22,18 +24,5 @@ export const FilterList: React.FC<filterListProps> = ({
         </div>
       </div>
     </>
-  )
-}
-
-type checkboxProps = {
-  title: string
-}
-
-const CheckBox: React.FC<checkboxProps> = ({ title }) => {
-  return (
-    <button className="check  gap-10 flex items-center">
-      <input type="checkbox" />
-      <p className="font-bold">{title}</p>
-    </button>
   )
 }

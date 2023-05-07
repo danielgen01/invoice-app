@@ -1,0 +1,9 @@
+input[type='checkbox']:checked ~ div {
+    background-color: #7C5CDA;
+    border-color: #7C5CDA;
+  }
+  
+  input[type='checkbox']:checked ~ div svg {
+    opacity: 1;
+  }
+  
