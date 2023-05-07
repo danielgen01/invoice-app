@@ -151,7 +151,7 @@ const EditInvoiceDialog = () => {
         style={{ display: isEditInvoiceFormOpen ? "block" : "none" }}
       ></div>
       <dialog
-        className=" New Invoice Modal px-5  py-5  flex flex-col gap-6 bg-[#F8F8FB]
+        className=" New Invoice Modal px-5  py-5  flex flex-col gap-6 bg-white
        dark:bg-[#0C0E16] dark:text-white 
         md:w-[80%] absolute top-0 md:px-10
          xl:w-[30%] xl:ml-20 xl:max-h-screen xl:gap-0 xl:py-0  
@@ -204,7 +204,7 @@ const EditInvoiceDialog = () => {
           ))}
           <button
             className="flex items-center justify-center gap-2 
-          bg-[#DFE3FA] py-3 rounded-full dark:bg-[#1E2139]"
+          hover:bg-[#DFE3FA] bg-[#F8F8FB] py-3 rounded-full dark:bg-[#1E2139]"
             onClick={addItem}
           >
             <img src={iconplus} alt="add" />
@@ -217,14 +217,15 @@ const EditInvoiceDialog = () => {
         <div className="bg-white h-14 dark:bg-[#1E2139]">
           <div className="footer-content-buttons flex items-center gap-2 w-full h-full px-4 justify-end">
             <button
-              className="text-[#9277FF] font-bold bg-[#DFE3FA] px-5 py-3 rounded-full dark:text-white dark:bg-[#252945]"
+              className="text-[#9277FF] font-bold bg-[#DFE3FA] px-5 py-3 rounded-full
+               dark:text-white dark:bg-[#252945] hover:bg-[#F8F8FB]"
               onClick={handleToggleEditInvoiceForm}
             >
               Cancel
             </button>
 
             <button
-              className="text-white font-bold bg-[#7C5DFA] px-5 py-3 rounded-full"
+              className="text-white font-bold bg-[#7C5DFA] px-5 py-3 rounded-full hover:bg-[#9277FF]"
               onClick={handleUpdateInvoice}
             >
               Save Changes

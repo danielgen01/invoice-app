@@ -48,7 +48,7 @@ const BillFromForm: React.FC<BillFromProps> = ({
               name="city"
               id="city"
               className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 w-40 outline-none
-               dark:bg-[#1E2139] focus:border-[#7C5DFA]"
+               dark:bg-[#252945] focus:border-[#7C5DFA]"
               value={billFromData.city}
               onChange={(e) => handleInputChange(e, "city")}
             />
@@ -66,7 +66,7 @@ const BillFromForm: React.FC<BillFromProps> = ({
               name="postcode"
               id="postcode"
               className="font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2
-               w-40 outline-none dark:bg-[#41445a] focus:border-[#7C5DFA]"
+               w-40 outline-none dark:bg-[#252945] focus:border-[#7C5DFA]"
               value={billFromData.postCode}
               onChange={(e) => handleInputChange(e, "postCode")}
             />

@@ -185,7 +185,7 @@ const NewInvoiceDialog = () => {
       <section
         role="dialog"
         className=" New Invoice Modal px-5  py-5  flex flex-col gap-6
-         bg-[#F8F8FB]
+         bg-white
        dark:bg-[#0C0E16] dark:text-white 
         md:w-[80%] absolute top-0 md:px-10
          xl:w-[30%] xl:ml-20 xl:max-h-screen xl:gap-0 xl:py-0 
