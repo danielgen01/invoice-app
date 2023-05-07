@@ -1,12 +1,20 @@
 import React from "react"
 import "./Checkbox.css"
+import { useAppDispatch } from "../../../../Redux/store"
+import { filterList } from "../../../../Redux/slices/Data/DataSlice"
 
 type checkboxProps = {
   title: string
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const CheckBox: React.FC<checkboxProps> = ({ title }) => {
+  const dispatch = useAppDispatch()
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(
+      filterList({ status: title.toLowerCase(), checked: event.target.checked })
+    )
+  }
   return (
     <div>
       <label className="check gap-10 flex items-center cursor-pointer">
@@ -15,7 +23,7 @@ const CheckBox: React.FC<checkboxProps> = ({ title }) => {
           name="check-task"
           id="check-task"
           className="w-6 h-6 rounded-md bg-gray-300 border-2 border-transparent focus:border-[#7C5CDA] focus:ring-transparent opacity-0 absolute cursor-pointer"
-          onChange={()=>{console.log("Changed")}}
+          onChange={handleChange}
         />
         <div className="w-6 h-6 rounded-md bg-gray-300 border-2 border-transparent hover:border-[#7C5CDA] flex items-center justify-center">
           <svg

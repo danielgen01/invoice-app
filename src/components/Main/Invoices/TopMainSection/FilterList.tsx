@@ -1,4 +1,6 @@
 import CheckBox from "./CheckBox"
+import { useAppSelector } from "../../../../Redux/store"
+import { RootState } from "../../../../Redux/rootReducer"
 
 type filterListProps = {
   isFilterListOpen: boolean
@@ -8,6 +10,8 @@ export const FilterList: React.FC<filterListProps> = ({
   isFilterListOpen,
   handleToggleFilterList,
 }) => {
+  const data = useAppSelector((state: RootState) => state.data.Data)
+
   return (
     <>
       <div

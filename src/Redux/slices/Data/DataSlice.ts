@@ -62,6 +62,7 @@ const dataSlice = createSlice({
   initialState: {
     Data: Data,
     activeInvoice: emptyInvoice,
+    filteredData: Data,
   },
   reducers: {
     setActiveInvoice: (state, action) => {
@@ -93,6 +94,15 @@ const dataSlice = createSlice({
         state.activeInvoice.status = action.payload
       }
     },
+    filterList: (
+      state,
+      action: PayloadAction<{ status: string; checked: boolean }>
+    ) => {
+      const { status, checked } = action.payload
+      state.filteredData = state.Data.filter((invoice) => {
+        return checked ? invoice.status === status : true
+      })
+    },
   },
 })
 
@@ -108,4 +118,5 @@ export const {
   deleteInvoice,
   updateActiveInvoiceStatus,
   updateActiveInvoice,
+  filterList
 } = dataSlice.actions
