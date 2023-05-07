@@ -52,6 +52,11 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
     console.log(activeInvoice.status)
   }, [activeInvoice])
 
+  // prevent from showing scrolled content when user clicks on an invoice
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <>
       <div className="overlay"> </div>
