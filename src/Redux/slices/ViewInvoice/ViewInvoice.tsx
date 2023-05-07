@@ -32,9 +32,6 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
     handleResetActiveInvoice()
   }
 
-  const activeInvoice = useAppSelector(
-    (state: RootState) => state.data.activeInvoice
-  )
 
   const handleToggleEditInvoiceForm = () => {
     dispatch(toggleEditInvoiceForm())
@@ -47,10 +44,6 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
   const changeStatusToPaid = () => {
     dispatch(updateActiveInvoiceStatus("paid"))
   }
-
-  useEffect(() => {
-    console.log(activeInvoice.status)
-  }, [activeInvoice])
 
   // prevent from showing scrolled content when user clicks on an invoice
   useEffect(() => {
