@@ -26,15 +26,16 @@ export const StatusBox = () => {
   }
 
   const getStatusClasses = (status: string) => {
-    switch (status) {
-      case "Pending":
-        return { bg: "bg-orange-500", text: "text-orange-900" }
-      case "Paid":
-        return { bg: "bg-green-500", text: "text-green-900" }
-      case "Draft":
+    const lowerCaseStatus = status.toLowerCase()
+    switch (lowerCaseStatus) {
+      case "pending":
+        return { bg: "bg-orange-100", text: "text-orange-500" }
+      case "paid":
+        return { bg: "bg-green-100", text: "text-green-500" }
+      case "draft":
         return { bg: "bg-white", text: "text-black" }
       default:
-        return { bg: "bg-gray-500", text: "text-gray-900" }
+        return { bg: "bg-gray-100", text: "text-gray-500" }
     }
   }
 
@@ -49,10 +50,12 @@ export const StatusBox = () => {
           {activeInvoice.status}
         </h1>
         <div
-          className={`status-box flex gap-4 items-center justify-center w-[80%] py-2 rounded-md ${statusBgColor} ${statusTextColor}`}
+          className={`status-box flex gap-4 items-center justify-center w-[80%] py-2 rounded-md ${statusBgColor}`}
         >
-          <BsCircleFill className="text-sm" />
-          <p className="font-bold text-sm capitalize">{activeInvoice.status}</p>
+          <BsCircleFill className={`text-sm ${statusTextColor}`} />
+          <p className={`font-bold text-sm capitalize ${statusTextColor}`}>
+            {activeInvoice.status}
+          </p>
         </div>
 
         <button
