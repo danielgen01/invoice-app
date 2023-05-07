@@ -3,17 +3,19 @@ import "./Checkbox.css"
 
 type checkboxProps = {
   title: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 const CheckBox: React.FC<checkboxProps> = ({ title }) => {
   return (
-    <button>
+    <div>
       <label className="check gap-10 flex items-center cursor-pointer">
         <input
           type="checkbox"
           name="check-task"
           id="check-task"
           className="w-6 h-6 rounded-md bg-gray-300 border-2 border-transparent focus:border-[#7C5CDA] focus:ring-transparent opacity-0 absolute cursor-pointer"
+          onChange={()=>{console.log("Changed")}}
         />
         <div className="w-6 h-6 rounded-md bg-gray-300 border-2 border-transparent hover:border-[#7C5CDA] flex items-center justify-center">
           <svg
@@ -31,7 +33,7 @@ const CheckBox: React.FC<checkboxProps> = ({ title }) => {
         </div>
         <p className="font-bold text-md dark:text-white">{title}</p>
       </label>
-    </button>
+    </div>
   )
 }
 
