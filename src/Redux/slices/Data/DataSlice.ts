@@ -106,11 +106,10 @@ const dataSlice = createSlice({
   },
 })
 
-// Export
-// Export reducer directly
+
 export default dataSlice.reducer
 
-// Export actions for use in components
+
 export const {
   setActiveInvoice,
   resetActiveInvoice,
