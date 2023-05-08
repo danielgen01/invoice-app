@@ -1,4 +1,3 @@
-import React from "react"
 import { BsCircleFill } from "react-icons/bs"
 import { RootState } from "../../../rootReducer"
 import { useAppSelector, useAppDispatch } from "../../../store"

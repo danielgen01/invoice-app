@@ -1,8 +1,4 @@
 import React from "react"
-// import Logo from "../../../public/assets/logo.svg"
-// import moon from "../../../public/assets/icon-moon.svg"
-// import avatar from "../../../public/assets/image-avatar.jpg"
-// import sun from "../../../public/assets/icon-sun.svg"
 import Logo from "../../../../../public/assets/logo.svg"
 import moon from "../../../../../public/assets/icon-moon.svg"
 import avatar from "../../../../../public/assets/image-avatar.jpg"

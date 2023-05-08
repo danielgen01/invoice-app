@@ -1,4 +1,3 @@
-import React from "react"
 import arrowleft from "../../../../public/assets/icon-arrow-left.svg"
 import iconplus from "../../../../public/assets/icon-plus.svg"
 import { ItemNameForm } from "./components/ItemNameForm"
@@ -20,7 +19,6 @@ const EditInvoiceDialog = () => {
     addItem,
     removeItem,
     updateItem,
-    isAnyFieldEmpty,
     isEditInvoiceFormOpen,
     activeInvoice,
     itemForms,
@@ -71,7 +69,7 @@ const EditInvoiceDialog = () => {
 
         <section className="flex flex-col gap-2 Itemlist overflow-y-scroll h-60">
           <h1 className="font-bold text-medium-gray text-xl ">Item List</h1>
-          {itemForms.map((item: any, index: number) => (
+          {itemForms.map((item: any) => (
             <>
               <ItemNameForm
                 id={item.id}

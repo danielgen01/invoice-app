@@ -1,4 +1,3 @@
-import React from "react"
 import { TopMainSection } from "./TopMainSection/TopMainSection"
 import InvoiceList from "./InvoiceList/InvoiceList"
 

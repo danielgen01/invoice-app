@@ -10,9 +10,7 @@ export function TopMainSection() {
   const dispatch = useAppDispatch()
   const data = useAppSelector((state: RootState) => state.data.Data)
   const [isFilterListOpen, setIsFilterListOpen] = useState(false)
-  const isNewInvoiceFormOpen = useAppSelector(
-    (state: RootState) => state.newInvoice.isNewInvoiceFormOpen
-  )
+ 
 
   const handleToggleNewInvoiceForm = () => {
     dispatch(toggleNewInvoiceForm())

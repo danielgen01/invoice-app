@@ -1,11 +1,10 @@
-import React, { useEffect } from "react"
+import React from "react"
 import arrowRight from "../../../public/assets/icon-arrow-right.svg"
 import { useAppDispatch, useAppSelector } from "../../Redux/store"
 import { Link } from "react-router-dom"
 import { BsCircleFill } from "react-icons/bs"
 import {
   setActiveInvoice,
-  resetActiveInvoice,
 } from "../../Redux/slices/Data/DataSlice"
 import { RootState } from "../../Redux/rootReducer"
 
@@ -42,9 +41,7 @@ const InvoiceRow: React.FC<props> = ({
 
   const batchColorClass = getBatchColorClass(status)
 
-  const activeInvoice = useAppSelector(
-    (state: RootState) => state.data.activeInvoice
-  )
+
 
   const handleSetActiveInvoice = (invoiceId: any) => {
     const invoice = data.find((invoice) => invoice.id === invoiceId)
@@ -53,10 +50,7 @@ const InvoiceRow: React.FC<props> = ({
     }
   }
 
-  // Reset active invoice
-  const handleResetActiveInvoice = () => {
-    dispatch(resetActiveInvoice())
-  }
+  
 
   return (
     <Link

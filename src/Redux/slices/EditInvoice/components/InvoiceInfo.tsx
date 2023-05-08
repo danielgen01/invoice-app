@@ -1,7 +1,6 @@
 import React from "react"
 import { Listbox } from "@headlessui/react"
 import arrowDown from "../../../../../public/assets/icon-arrow-down.svg"
-import { useState } from "react"
 
 type InvoiceInfoProps = {
   activeInvoice: any

@@ -1,7 +1,6 @@
 import React from "react"
 import arrowleft from "../../../../public/assets/icon-arrow-left.svg"
-import { RootState } from "../../rootReducer"
-import { useAppSelector, useAppDispatch } from "../../store"
+import { useAppDispatch } from "../../store"
 import { useNavigate } from "react-router-dom"
 import { toggleEditInvoiceForm } from "../EditInvoice/EditInvoiceSlice"
 import { toggleDeleteInvoiceForm } from "../DeleteDialog/DeleteDialogSlice"
@@ -18,7 +17,7 @@ import { TotalBox } from "./components/TotalBox"
 type props = {
   invoiceId: any
 }
-const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
+const ViewInvoice: React.FC<props> = () => {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
@@ -31,7 +30,6 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
     navigate("/")
     handleResetActiveInvoice()
   }
-
 
   const handleToggleEditInvoiceForm = () => {
     dispatch(toggleEditInvoiceForm())

@@ -1,5 +1,4 @@
 import React from "react"
-import { emptyInvoice } from "../../Data/DataSlice"
 
 type BillToProps = {
   activeInvoice: any

@@ -14,7 +14,7 @@ export const ItemNameForm: React.FC<ItemNameProps> = ({
   defaultValueName,
   defaultValueQuantity,
   defaultValuePrice,
-  defaultValueTotal,
+  // defaultValueTotal,
   removeItem,
   id,
   updateItem,

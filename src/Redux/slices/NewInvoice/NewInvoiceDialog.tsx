@@ -1,6 +1,6 @@
 import iconplus from "../../../../public/assets/icon-plus.svg"
 import { RootState } from "../../rootReducer"
-import { useAppSelector, useAppDispatch } from "../../store"
+import { useAppSelector} from "../../store"
 import BillFromForm from "./components/BillFromForm"
 import BillToForm from "./components/BillToForm"
 import InvoiceInfo from "./components/InvoiceInfoForm"
@@ -10,7 +10,6 @@ import { ItemList } from "./components/ItemList"
 import { useNewInvoice } from "./useNewInvoice"
 
 const NewInvoiceDialog = () => {
-  const dispatch = useAppDispatch()
   // Import states and functions from useNewInvoice
   const {
     billFromData,
