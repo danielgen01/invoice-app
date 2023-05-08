@@ -1,193 +1,38 @@
-import { useState } from "react"
 import iconplus from "../../../../public/assets/icon-plus.svg"
 import { RootState } from "../../rootReducer"
 import { useAppSelector, useAppDispatch } from "../../store"
-import { toggleNewInvoiceForm } from "./NewInvoiceSlice"
-import { createNewInvoice } from "../Data/DataSlice"
-import { InvoiceType } from "../Data/DataSlice"
 import BillFromForm from "./components/BillFromForm"
 import BillToForm from "./components/BillToForm"
 import InvoiceInfo from "./components/InvoiceInfoForm"
 import GoBackButton from "./components/GoBackButton"
 import { FooterButtons } from "./components/FooterButtons"
 import { ItemList } from "./components/ItemList"
+import { useNewInvoice } from "./useNewInvoice"
 
 const NewInvoiceDialog = () => {
   const dispatch = useAppDispatch()
+  // Import states and functions from useNewInvoice
+  const {
+    billFromData,
+    setBillFromData,
+    billToData,
+    setBillToData,
+    invoiceInfoData,
+    setInvoiceInfoData,
+    itemForms,
+    setItemForms,
+    handleAddInvoice,
+    handleSaveAsDraft,
+    handleToggleNewInvoiceForm,
+    addItem,
+    removeItem,
+  } = useNewInvoice()
 
   // global States
 
   const isNewInvoiceFormOpen = useAppSelector(
     (state: RootState) => state.newInvoice.isNewInvoiceFormOpen
   )
-
-  // States
-
-  const [itemForms, setItemForms] = useState<any>([
-    {
-      id: "",
-      name: "",
-      quantity: 0,
-      price: 0,
-      total: 0,
-    },
-  ])
-
-  const [billFromData, setBillFromData] = useState({
-    street: "",
-    city: "",
-    postCode: "",
-    country: "",
-  })
-
-  const [billToData, setBillToData] = useState({
-    clientName: "",
-    clientEmail: "",
-    street: "",
-    city: "",
-    postCode: "",
-    country: "",
-  })
-
-  const [invoiceInfoData, setInvoiceInfoData] = useState({
-    date: "",
-    paymentTerms: 0,
-    projectDescription: "",
-  })
-
-  // Functions
-
-  const handleToggleNewInvoiceForm = () => {
-    dispatch(toggleNewInvoiceForm())
-  }
-
-  const addItem = () => {
-    setItemForms([...itemForms, { id: new Date().getTime() }])
-  }
-
-  const removeItem = (id: number) => {
-    setItemForms(itemForms.filter((item: any) => item.id !== id))
-  }
-
-  const isAnyFieldEmpty = () => {
-    const checkEmptyFields = (obj: object) => {
-      return Object.values(obj).some(
-        (value: any) => value === "" || value === 0
-      )
-    }
-
-    const billFromDataEmpty = checkEmptyFields(billFromData)
-    const billToDataEmpty = checkEmptyFields(billToData)
-    const invoiceInfoDataEmpty = checkEmptyFields(invoiceInfoData)
-
-    return billFromDataEmpty || billToDataEmpty || invoiceInfoDataEmpty
-  }
-
-  const handleAddInvoice = () => {
-    if (isAnyFieldEmpty()) {
-      alert("Please fill in all fields.")
-      return
-    }
-
-    const updatedItemForms = itemForms.map((item: any) => {
-      return {
-        ...item,
-        total: item.quantity * item.price,
-      }
-    })
-
-    const invoiceDate = new Date(invoiceInfoData.date)
-    const paymentDueDate = new Date(invoiceDate)
-    paymentDueDate.setDate(invoiceDate.getDate() + invoiceInfoData.paymentTerms)
-
-    const newInvoice: InvoiceType = {
-      id: Math.floor(Math.random() * 1_00_00).toString(), // Generieren Sie hier eine eindeutige ID für die Rechnung
-      createdAt: isValidDate(invoiceDate)
-        ? invoiceDate.toISOString().split("T")[0]
-        : new Date().toISOString().split("T")[0],
-      paymentDue: isValidDate(invoiceDate)
-        ? invoiceDate.toISOString().split("T")[0]
-        : new Date().toISOString().split("T")[0],
-      paymentTerms: invoiceInfoData.paymentTerms,
-      clientName: billToData.clientName,
-      clientEmail: billToData.clientEmail,
-      description: invoiceInfoData.projectDescription,
-      status: "pending",
-      senderAddress: {
-        street: billFromData.street,
-        city: billFromData.city,
-        postCode: billFromData.postCode,
-        country: billFromData.country,
-      },
-      clientAddress: {
-        street: billToData.street,
-        city: billToData.city,
-        postCode: billToData.postCode,
-        country: billToData.country,
-      },
-      items: updatedItemForms,
-      total: updatedItemForms.reduce(
-        (acc: any, item: { total: any }) => acc + item.total,
-        0
-      ),
-    }
-
-    dispatch(createNewInvoice(newInvoice))
-    handleToggleNewInvoiceForm()
-  }
-
-  const isValidDate = (date: any) => {
-    return date instanceof Date && !isNaN(date.getTime())
-  }
-
-  // save as draft
-  const handleSaveAsDraft = () => {
-    const updatedItemForms = itemForms.map((item: any) => {
-      return {
-        ...item,
-        total: item.quantity * item.price,
-      }
-    })
-
-    const invoiceDate = new Date(invoiceInfoData.date)
-    const paymentDueDate = new Date(invoiceDate)
-    paymentDueDate.setDate(invoiceDate.getDate() + invoiceInfoData.paymentTerms)
-
-    const newInvoice: Partial<InvoiceType> = {
-      id: Math.floor(Math.random() * 1_00_00).toString(),
-      createdAt: isValidDate(invoiceDate)
-        ? invoiceDate.toISOString().split("T")[0]
-        : new Date().toISOString().split("T")[0],
-      paymentDue: isValidDate(paymentDueDate)
-        ? paymentDueDate.toISOString().split("T")[0]
-        : new Date().toISOString().split("T")[0],
-      paymentTerms: invoiceInfoData.paymentTerms || 0,
-      clientName: billToData.clientName || "",
-      clientEmail: billToData.clientEmail || "",
-      description: invoiceInfoData.projectDescription || "",
-      status: "draft",
-      senderAddress: {
-        street: billFromData.street || "",
-        city: billFromData.city || "",
-        postCode: billFromData.postCode || "",
-        country: billFromData.country || "",
-      },
-      clientAddress: {
-        street: billToData.street || "",
-        city: billToData.city || "",
-        postCode: billToData.postCode || "",
-        country: billToData.country || "",
-      },
-      items: updatedItemForms,
-      total: updatedItemForms.reduce(
-        (acc: any, item: { total: any }) => acc + item.total,
-        0
-      ),
-    }
-
-    dispatch(createNewInvoice(newInvoice as InvoiceType))
-    handleToggleNewInvoiceForm()
-  }
 
   return (
     <>
