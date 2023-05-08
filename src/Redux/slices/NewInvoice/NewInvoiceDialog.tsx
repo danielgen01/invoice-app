@@ -89,6 +89,13 @@ const NewInvoiceDialog = () => {
       return
     }
 
+    const updatedItemForms = itemForms.map((item: any) => {
+      return {
+        ...item,
+        total: item.quantity * item.price,
+      }
+    })
+
     const invoiceDate = new Date(invoiceInfoData.date)
     const paymentDueDate = new Date(invoiceDate)
     paymentDueDate.setDate(invoiceDate.getDate() + invoiceInfoData.paymentTerms)
@@ -118,8 +125,8 @@ const NewInvoiceDialog = () => {
         postCode: billToData.postCode,
         country: billToData.country,
       },
-      items: itemForms,
-      total: itemForms.reduce(
+      items: updatedItemForms,
+      total: updatedItemForms.reduce(
         (acc: any, item: { total: any }) => acc + item.total,
         0
       ),
@@ -133,10 +140,15 @@ const NewInvoiceDialog = () => {
     return date instanceof Date && !isNaN(date.getTime())
   }
 
-  // ...
-
   // save as draft
   const handleSaveAsDraft = () => {
+    const updatedItemForms = itemForms.map((item: any) => {
+      return {
+        ...item,
+        total: item.quantity * item.price,
+      }
+    })
+
     const invoiceDate = new Date(invoiceInfoData.date)
     const paymentDueDate = new Date(invoiceDate)
     paymentDueDate.setDate(invoiceDate.getDate() + invoiceInfoData.paymentTerms)
@@ -166,12 +178,11 @@ const NewInvoiceDialog = () => {
         postCode: billToData.postCode || "",
         country: billToData.country || "",
       },
-      items: itemForms || [],
-      total:
-        itemForms.reduce(
-          (acc: any, item: { total: any }) => acc + item.total,
-          0
-        ) || 0,
+      items: updatedItemForms,
+      total: updatedItemForms.reduce(
+        (acc: any, item: { total: any }) => acc + item.total,
+        0
+      ),
     }
 
     dispatch(createNewInvoice(newInvoice as InvoiceType))

@@ -37,7 +37,7 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
     },
   ]
 
-  const today = new Date().toISOString().split("T")[0]
+  // const today = new Date().toISOString().split("T")[0]
 
   return (
     <>
@@ -55,7 +55,7 @@ export const InvoiceInfo: React.FC<InvoiceInfoProps> = ({
             id="Invoicedate"
             className="dark:bg-[#1E2139] font-bold h-12  xl:h-10 rounded-md border-medium-gray/50 border-2 px-4
              outline-none focus:border-[#7C5DFA]"
-            value={invoiceInfoData.date || today}
+            value={invoiceInfoData.date}
             onChange={(e) => handleInputChange(e, "date")}
           />
         </div>

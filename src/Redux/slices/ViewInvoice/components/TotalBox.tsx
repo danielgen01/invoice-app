@@ -11,17 +11,18 @@ export function TotalBox() {
 
   useEffect(() => {
     let tempGrandTotal = 0
-
+  
     if (activeInvoice) {
       activeInvoice.items.forEach((item) => {
         tempGrandTotal += Number(item.total)
       })
     }
-
+  
     setGrandTotal(tempGrandTotal)
   }, [activeInvoice])
 
-  console.log(grandTotal)
+  console.log(activeInvoice)
+  
 
   return (
     <section className="total-box min-h-[80px] bg-[#1E2139] rounded-b-xl dark:bg-black">
