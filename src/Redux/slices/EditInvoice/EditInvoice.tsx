@@ -1,147 +1,30 @@
 import React from "react"
 import arrowleft from "../../../../public/assets/icon-arrow-left.svg"
 import iconplus from "../../../../public/assets/icon-plus.svg"
-import { toggleEditInvoiceForm } from "./EditInvoiceSlice"
-import { useAppDispatch, useAppSelector } from "../../store"
-import { RootState } from "../../rootReducer"
 import { ItemNameForm } from "./components/ItemNameForm"
 import { InvoiceInfo } from "./components/InvoiceInfo"
 import { BillToForm } from "./components/BillToForm"
 import { BillFromForm } from "./components/BillFromForm"
-import { Listbox } from "@headlessui/react"
-import {
-  updateActiveInvoice,
-  resetActiveInvoice,
-  setActiveInvoice,
-} from "../Data/DataSlice"
-import { useState } from "react"
-import { InvoiceType } from "../Data/DataSlice"
+import { useEditInvoice } from "./useEditInvoice"
 
 const EditInvoiceDialog = () => {
-  const dispatch = useAppDispatch()
-
-  const isEditInvoiceFormOpen = useAppSelector(
-    (state: RootState) => state.editInvoice.isEditInvoiceFormOpen
-  )
-
-  const activeInvoice = useAppSelector(
-    (state: RootState) => state.data.activeInvoice
-  )
-
-  const data = useAppSelector(
-    (state: RootState) => state.data.Data
-  )
-
-  // States
-
-  const [itemForms, setItemForms] = useState<any>(activeInvoice.items)
-
-  const [billFromData, setBillFromData] = useState({
-    street: activeInvoice.senderAddress.street,
-    city: activeInvoice.senderAddress.city,
-    postCode: activeInvoice.senderAddress.postCode,
-    country: activeInvoice.senderAddress.country,
-  })
-
-  const [billToData, setBillToData] = useState({
-    clientName: activeInvoice.clientName,
-    clientEmail: activeInvoice.clientEmail,
-    street: activeInvoice.clientAddress.street,
-    city: activeInvoice.clientAddress.city,
-    postCode: activeInvoice.clientAddress.postCode,
-    country: activeInvoice.clientAddress.country,
-  })
-
-  const [invoiceInfoData, setInvoiceInfoData] = useState({
-    date: activeInvoice.createdAt,
-    paymentTerms: activeInvoice.paymentTerms,
-    projectDescription: activeInvoice.description,
-  })
-
-  const handleToggleEditInvoiceForm = () => {
-    dispatch(toggleEditInvoiceForm())
-  }
-
-  const addItem = () => {
-    setItemForms([...itemForms, { id: Math.floor(Math.random() * 1_000_000) }
-    ])
-  }
-
-  const removeItem = (id: number) => {
-    setItemForms(itemForms.filter((item: any) => item.id !== id))
-  }
-
-  const updateItem = (id: number, updatedItem: any) => {
-    setItemForms(itemForms.map((item: any) => (item.id === id ? updatedItem : item)))
-  }
-  
-
-  const isAnyFieldEmpty = () => {
-    const checkEmptyFields = (obj: object) => {
-      return Object.values(obj).some(
-        (value: any) => value === "" || value === 0
-      )
-    }
-
-    const billFromDataEmpty = checkEmptyFields(billFromData)
-    const billToDataEmpty = checkEmptyFields(billToData)
-    const invoiceInfoDataEmpty = checkEmptyFields(invoiceInfoData)
-
-    return billFromDataEmpty || billToDataEmpty || invoiceInfoDataEmpty
-  }
-
-  const handleUpdateInvoice = () => {
-    // if (isAnyFieldEmpty()) {
-    //   alert("Please fill in all fields.")
-    //   return
-    // }
-
-    const invoiceDate = new Date(invoiceInfoData.date)
-    const paymentDueDate = new Date(invoiceDate)
-    paymentDueDate.setDate(invoiceDate.getDate() + invoiceInfoData.paymentTerms)
-
-    const updatedItems = itemForms.map((item: any) => {
-      const price = parseFloat(item.price) || 0
-      const quantity = parseFloat(item.quantity) || 0
-      const total = price * quantity
-      const name = item.name
-      return { ...item, total, name, quantity }
-    })
-
-    const newInvoice: any = {
-      id: Math.floor(Math.random() * 1_00_00).toString(),
-      createdAt: invoiceInfoData.date,
-      paymentDue: paymentDueDate.toISOString().split("T")[0],
-      paymentTerms: invoiceInfoData.paymentTerms,
-      clientName: billToData.clientName,
-      clientEmail: billToData.clientEmail,
-      description: invoiceInfoData.projectDescription,
-      status: "pending",
-      senderAddress: {
-        street: billFromData.street,
-        city: billFromData.city,
-        postCode: billFromData.postCode,
-        country: billFromData.country,
-      },
-      clientAddress: {
-        street: billToData.street,
-        city: billToData.city,
-        postCode: billToData.postCode,
-        country: billToData.country,
-      },
-      items: updatedItems,
-      total: updatedItems.reduce(
-        (acc: any, item: { total: any }) => acc + item.total,
-        0
-      ),
-    }
-
-    dispatch(updateActiveInvoice(newInvoice))
-    dispatch(resetActiveInvoice())
-    dispatch(setActiveInvoice(newInvoice))
-    handleToggleEditInvoiceForm()
-    console.log(data)
-  }
+  const {
+    billFromData,
+    setBillFromData,
+    billToData,
+    setBillToData,
+    invoiceInfoData,
+    setInvoiceInfoData,
+    handleToggleEditInvoiceForm,
+    handleUpdateInvoice,
+    addItem,
+    removeItem,
+    updateItem,
+    isAnyFieldEmpty,
+    isEditInvoiceFormOpen,
+    activeInvoice,
+    itemForms,
+  } = useEditInvoice()
 
   return (
     <>
@@ -198,7 +81,6 @@ const EditInvoiceDialog = () => {
                 defaultValueTotal={item.total}
                 removeItem={removeItem}
                 updateItem={updateItem}
-
               />
             </>
           ))}
