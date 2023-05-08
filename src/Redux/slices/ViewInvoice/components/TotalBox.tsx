@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { RootState } from "../../../rootReducer"
 import { useAppSelector } from "../../../store"
 
@@ -7,9 +7,21 @@ export function TotalBox() {
     (state: RootState) => state.data.activeInvoice
   )
 
-  const grandTotal = activeInvoice
-    ? activeInvoice.items.reduce((sum, item) => sum + item.total, 0)
-    : 0
+  const [grandTotal, setGrandTotal] = useState(0)
+
+  useEffect(() => {
+    let tempGrandTotal = 0
+
+    if (activeInvoice) {
+      activeInvoice.items.forEach((item) => {
+        tempGrandTotal += Number(item.total)
+      })
+    }
+
+    setGrandTotal(tempGrandTotal)
+  }, [activeInvoice])
+
+  console.log(grandTotal)
 
   return (
     <section className="total-box min-h-[80px] bg-[#1E2139] rounded-b-xl dark:bg-black">
@@ -18,7 +30,7 @@ export function TotalBox() {
           <h1 className="font-semibold">Grand Total</h1>
         </div>
         <div className="total-sum flex justify-end  font-bold">
-          <h1 className="text-xl">€ {grandTotal}</h1>
+          <h1 className="text-xl">€ {Number(grandTotal)}</h1>
         </div>
       </div>
     </section>

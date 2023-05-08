@@ -53,7 +53,7 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
   return (
     <>
       <div className="overlay"> </div>
-      <body className="content px-5 py-5 xl:px-72 lg:py-10">
+      <div className="content px-5 py-5 xl:px-72 lg:py-10">
         <button
           className="go-back-button flex items-center gap-5 "
           onClick={handleGoBack}
@@ -95,7 +95,7 @@ const ViewInvoice: React.FC<props> = ({ invoiceId }) => {
           handleToggleDeleteInvoiceForm={handleToggleDeleteInvoiceForm}
           changeStatusToPaid={changeStatusToPaid}
         />
-      </body>
+      </div>
     </>
   )
 }

@@ -95,8 +95,12 @@ const NewInvoiceDialog = () => {
 
     const newInvoice: InvoiceType = {
       id: Math.floor(Math.random() * 1_00_00).toString(), // Generieren Sie hier eine eindeutige ID für die Rechnung
-      createdAt: invoiceInfoData.date,
-      paymentDue: paymentDueDate.toISOString().split("T")[0],
+      createdAt: isValidDate(invoiceDate)
+        ? invoiceDate.toISOString().split("T")[0]
+        : new Date().toISOString().split("T")[0],
+      paymentDue: isValidDate(invoiceDate)
+        ? invoiceDate.toISOString().split("T")[0]
+        : new Date().toISOString().split("T")[0],
       paymentTerms: invoiceInfoData.paymentTerms,
       clientName: billToData.clientName,
       clientEmail: billToData.clientEmail,
